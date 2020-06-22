@@ -7,6 +7,7 @@ class Navbar extends Component {
                 <div className="nav__title">Librarian</div>
                 <div className="nav__link">
                     <a href="/" className="active">Home</a>
+                    <a href="/database">Upload</a>
                     <a href="/database">Database</a>
                 </div>
                 <div className="nav__tool">
