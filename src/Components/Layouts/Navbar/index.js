@@ -4,7 +4,7 @@ class Navbar extends Component {
     render() {
         return (
             <div id="nav">
-                <div className="nav__title">filmography</div>
+                <div className="nav__title">Librarian</div>
                 <div className="nav__link">
                     <a href="/" className="active">Home</a>
                     <a href="/database">Database</a>
