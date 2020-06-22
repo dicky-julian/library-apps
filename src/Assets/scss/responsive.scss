@@ -87,12 +87,15 @@
     }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 450px) {
     .nav__title {
         display: none;
     }
     .nav__link {
         margin-left: 5%;
+    }
+    .home__header > h1 {
+        margin-top: -50px;
     }
     .product__list {
         .product {
