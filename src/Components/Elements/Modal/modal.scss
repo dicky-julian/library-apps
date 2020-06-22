@@ -1,0 +1,17 @@
+.modal {
+    background: #fff;
+    position: absolute;
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.04);
+}
+
+.modal__show {
+    opacity: 1;
+    transition: visibility 0s, opacity .25s linear;
+}
+
+.modal__hide {
+    opacity: 0;
+    transition: visibility 0s, opacity .25s linear;
+}

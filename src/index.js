@@ -6,6 +6,7 @@ import App from './Pages/App';
 import Router from './Routes';
 
 import './Assets/scss/main.scss';
+import './Assets/scss/responsive.scss';
 
 ReactDOM.render(
   <React.StrictMode>

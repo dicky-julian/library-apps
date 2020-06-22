@@ -7,13 +7,11 @@ class Navbar extends Component {
                 <div className="nav__title">filmography</div>
                 <div className="nav__link">
                     <a href="/" className="active">Home</a>
-                    <a href="/">Upload</a>
-                    <a href="/">Database</a>
+                    <a href="/database">Database</a>
                 </div>
                 <div className="nav__tool">
                     {/* <div></div> */}
-                    <a href="/">Masuk</a>
-                    {/* <a href="/">Register</a> */}
+                    <a href="/">Login</a>
                 </div>
             </div>
         )

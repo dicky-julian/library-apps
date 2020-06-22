@@ -1,66 +1,157 @@
+// HEADER
 .home__header {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100vh;
+    height: 101vh;
     min-height: 100vh;
-    background-image: url("https://images.pexels.com/photos/790104/pexels-photo-790104.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-    > h1 {
+    background-image: url("../../Assets/images/home/bg_header.png");
+
+    >h1 {
         margin-top: -40px;
         color: #fff;
-        > b {
+        text-align: center;
+        >b {
             font-size: unset;
         }
     }
-    > form {
+
+    >form {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 800px;
+        max-width: 90%;
         background: #fff;
-        border-radius: 10px;
-        > input {
+
+        >input {
             width: 100%;
             padding: 20px;
             background: transparent;
             border: 0;
+
             &:focus {
                 outline-width: 0;
+            }
+        }
+
+        .icon {
+            margin-right: 20px;
+            font-size: 25px;
+            color: #777777;
+            transform: scaleX(-1);
+            transition: .3s;
+
+            &:hover {
+                color: #000;
             }
         }
     }
 }
 
+// LIST of TOP BOOK
 .product__toplist {
     display: flex;
     justify-content: space-between;
     margin: -120px 0 0 7%;
+
     .product__desc {
         width: 26%;
         color: #fff;
+
         h4 {
             margin: 5px 0;
         }
+
+        p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
     }
+
     .product {
         width: 24%;
         background: #000;
-        > img {
+
+        >img {
             width: 100%;
             height: 120px;
-            object-fit:cover;
+            object-fit: cover;
         }
-        > div {
-            h5 {
-                margin: -35px 0 10px;
-            }
-            a {
-                display: block;
-                margin-top: 10px;
-                text-align: right;
-            }
+
+        >div {
             padding: 20px;
             color: #fff;
             line-height: 23px;
+
+            h5 {
+                margin: -35px 0 10px;
+
+                >a {
+                    color: #fff;
+                    font-size: unset;
+                }
+            }
+
+            >a {
+                display: block;
+                margin-top: 10px;
+                color: #fff;
+                text-align: right;
+            }
         }
+    }
+}
+
+.home__body {
+    margin-top: 80px;
+    padding: 0 7%;
+
+    // GENRE of BOOK
+    .product__tools {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .genre__list {
+            display: flex;
+            justify-content: center;
+
+            >div {
+                padding: 10px 25px;
+                color: #000;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            >.active {
+                background: #323537;
+                color: #fff;
+                font-weight: bold;
+            }
+        }
+    }
+
+    #sort__tools {
+        margin-top: 10px;
+        padding: 5px 0;
+        h6 {
+            margin: 0;
+            padding: 8px 100px 8px 20px;
+            font-weight: 500;
+            &:hover {
+                background: #f3f3f4;
+            }
+        }
+        > .active {
+            background: #f3f3f4;
+        }
+    }
+
+    #filter__tools {
+        @extend #sort__tools;
+        right: 7%;
     }
 }
