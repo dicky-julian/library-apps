@@ -1,0 +1,100 @@
+{
+    "book": [
+        {
+            "id" : 1,
+            "title" : "Extraordinary You",
+            "description" : "Seri ini bercerita tentang seorang siswi bernama Eun Dan-oh (Kim Hye-yoon) yang bersekolah di sebuah akademi bergengsi. Suatu hari, ia mengetahui bahwa dia dan semua orang di sekolahnya sebenarnya adalah karakter dalam manhwa yang berjudul Secret (비밀, RR: bimil). Ia memiliki kondisi jantung yang semakin memburuk, Dan-oh adalah karakter pendukung yang ditakdirkan segera meninggal dalam cerita ini. Tidak puas dengan takdir tersebut, dia memutuskan untuk membuat takdirnya sendiri dengan mencoba menentang alur cerita yang ada dan menemukan cinta sejati.[1][5][6] Harapan untuk terlepas dari kuasa Penulisnya semakin kuat setelah bertemu karakter tak bernama Siswa Nomor 13 (Kim Ro-woon). Namun, kejadian di sekitar Dan-oh dan Nomor 13 secara bertahap mulai terhubung dengan karya Penulis sebelumnya, Neungsohwa. Dengan mengubah takdir hidupnya ada harga yang harus dibayar.",
+            "id_author" : 1,
+            "id_genre" : 1,
+            "image" : "https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,q_auto:best,w_640/v1568260068/lcvuu7tsgb1nhgxbsahd.jpg"
+        },
+        {
+            "id" : 2,
+            "title" : "Got to Believe",
+            "description" : "As young Chichay (Kathryn Bernardo) unexpectedly met young Joaquin (Daniel Padilla) in their family-owned amusement fair, she taught him to believe that magic exists. However, their friendship abruptly ended as Chichay's family moved to the province while Joaquin had an almost-fatal accident which prevented him from living a normal life. Ten years later, they have literally bumped into each other but never had any idea about their childhood past. Despite living a comfortable and wealthy life, teenage Joaquin feels he is different due to his brain injury. His overprotective mother, Juliana (Carmina Villaroel), unknowingly hired teenage Chichay as his nanny. The two that had started off having an unpleasant relationship with each other eventually became friends. As they found comfort in each other's company, they learned various lessons in life such as the true meaning of friendship, of standing by your family, and of accepting one's self. While their feelings blossomed into love, things also got complicated and had put them to the test as they encountered numerous conflicts like their parents' past, their economic gap and the cause of Joaquin's accident when he was still a kid.",
+            "id_author" : 2,
+            "id_genre" : 1,
+            "image": "https://blogtvph.files.wordpress.com/2013/10/got-to-believe-poster.jpg"
+        },
+        {
+            "id" : 3,
+            "title" : "Meet Me After Sunset",
+            "description" : "Film ini berfokus kepada kisah persabahatan dan keluarga yang mengedepankan norma-norma ketimuran. Sosok Gadis (Agatha Chelsea) adalah seorang remaja perempuan yang berbeda dari kebanyakan. Ia lebih senang dan hanya bisa beraktivitas di malam hari dan juga hanya memiliki seorang sahabat yang bernama Bagas. Sementara itu, Vino (Maxime Bouttier) merupakan seorang anak yang baru saja pindah dari Jakarta untuk tinggal di Bandung. Meskipun Vino merasa kurang nyaman dengan tempat tinggal barunya, ia justru malah menemukan cinta sejatinya, Gadis. Namun, Vino harus berhadapan dengan Bagas (Billy Davidson), karena ia selama ini yang selalu menemani dan menjadi malaikat pelindung bagi Gadis sejak kecil.",
+            "id_author" : 2,
+            "id_genre" : 1,
+            "image": "https://3.bp.blogspot.com/-hya7bTPrseM/W1gBgwEGeRI/AAAAAAAABao/hTA69dB6DdMvwiUbKDMgc_hsgXSnJI-XQCLcBGAs/s1600/meet%2Bafter%2Bsunset-poster%2Bmovie%2Bwallpaper.jpg"
+        },
+        {
+            "id" : 4,
+            "title" : "Dilan 1990",
+            "description" : "Dilan 1990 merupakan film drama Indonesia tahun 2018. Film ini diangkat dari novel Dilan: Dia adalah Dilanku Tahun 1990 karya Pidi Baiq dan dibintangi oleh Iqbaal Ramadhan dan Vanesha Prescilla. Para pemain pendukungnya antara lain Farhan, Ira Wibowo, Tike Priatnakusumah, dan personel grup idola JKT48, Adhisty Zara. Ridwan Kamil, yang saat rilis film menjabat sebagai Wali Kota Bandung, juga ikut bermain di film ini. Kakak Vanesha, Sissy Priscillia, menjadi narator film sekaligus suara dari Milea dewasa.",
+            "id_author" : 2,
+            "id_genre" : 1,
+            "image": "http://cdn2.tstatic.net/style/foto/bank/images/dilan_20170512_184807.jpg"
+        },
+        {
+            "id" : 5,
+            "title" : "Hotel del Lune",
+            "description" : "The 'Guest House of the Moon' is not like any other hotel. A supernatural place, the hotel is not visible in its true form during the daytime as humans can only come across the hotel under special circumstances such as an invitation or lunar eclipse. Its staff and clients are all souls/ghosts coming to terms with unfinished business in their former lives before they pass on to the afterlife and cycle of reincarnation[5]; the staff in particular have been there for decades and even centuries as they have not settled their grudges. The exception to this is the hotel general manager, which has been filled by a succession of human 'passerbys' since they need to interact normally with the real world in instances like paying bills or fulfilling ghosts' requests with still-living relatives/friends. Some of the more powerful or long-lasting ghosts can make themselves present among humans but they have to abide by the guidelines of the deities Mago and Grim Reaper; for instance killing a human being will usually result in the soul being destroyed without going on to the afterlife.[6] Ghosts can see other ghosts and humans, however only a select few humans such as the Guest House of the Moon manager can see ghosts.",
+            "id_author" : 2,
+            "id_genre" : 1,
+            "image": "https://www.dramamilk.com/wp-content/uploads/2019/11/Hotel-del-luna-poster-best-drama-1.jpg"
+        },
+        {
+            "id" : 6,
+            "title" : "Naruto 1990",
+            "description" : "Naruto adalah sebuah serial manga karya Masashi Kishimoto yang diadaptasi menjadi serial anime. Manga Naruto bercerita seputar kehidupan tokoh utamanya, Naruto Uzumaki, seorang ninja yang hiperaktif, periang, dan ambisius yang ingin mewujudkan keinginannya untuk mendapatkan gelar Hokage, pemimpin dan ninja terkuat di desanya. Serial ini didasarkan pada komik one-shot oleh Kishimoto yang diterbitkan dalam edisi Akamaru Jump pada Agustus 1997.",
+            "id_author" : 2,
+            "id_genre" : 1,
+            "image": "http://www.merchandisingplaza.co.uk/223514/Poster-Naruto-Naruto-Shippuden-Split-Maxi-Poster-s.jpg"
+        },
+        {
+            "id" : 7,
+            "title" : "Descendants of the Sun",
+            "description" : "Naruto adalah sebuah serial manga karya Masashi Kishimoto yang diadaptasi menjadi serial anime. Manga Naruto bercerita seputar kehidupan tokoh utamanya, Naruto Uzumaki, seorang ninja yang hiperaktif, periang, dan ambisius yang ingin mewujudkan keinginannya untuk mendapatkan gelar Hokage, pemimpin dan ninja terkuat di desanya. Serial ini didasarkan pada komik one-shot oleh Kishimoto yang diterbitkan dalam edisi Akamaru Jump pada Agustus 1997.",
+            "id_author" : 2,
+            "id_genre" : 1,
+            "image": "http://www.jaehakim.com/wp-content/uploads/2555/04/DescendantsoftheSun-top.jpg"
+        },
+        {
+            "id" : 8,
+            "title" : "The Legend of The Blue Sea",
+            "description" : "During the Joseon era, a mermaid saves the son of a nobleman, Kim Dam-ryeong, from drowning. Following the incident, the two children become close friends and Dam-ryeong names her Se-hwa, meaning 'a bright, shining child', after his deceased younger sister. Despite being from two different worlds, they fall in love until Dam-ryeong is forced to take up an arranged marriage. Se-hwa plans to turn her fishtail into a pair of human legs and live up on land with Dam-ryeong, but is unable to do so due to having not reached adulthood yet. Devastated by the news of Dam-ryeong's marraige, she decides to leave him forever. Nevertheless, Dam-ryeong's love for Se-hwa forces him to leave his wife after the marriage and jump into the ocean to look for her. A distraught Se-hwa rescues him from drowning, and promptly erases his memories of her and their love so that he may not look for her again.",
+            "id_author" : 2,
+            "id_genre" : 1,
+            "image": "https://th.bing.com/th/id/OIP.fVD9qP4UB0Aj53iAng-eGQHaFL?pid=Api&rs=1"
+        },
+        {
+            "id" : 9,
+            "title" : "Pangako Sa'Yo",
+            "description" : "The story begins with the romance between Amor de Jesús (Eula Valdez) and Eduardo Buenavista (Tonton Gutierrez). Eduardo's mother, Doña Benita (Liza Lorena), opposes the relationship since Amor was a housemaid and because she wanted Eduardo to marry Claudia Zalameda (Jean Garcia) for political reasons. Doña Benita asked Eduardo's older brother, Diego (Jestoni Alarcon), who was also attracted to Amor, to separate them. Upon seeing Diego trying to rape Amor, Eduardo mistook it as them having a relationship, breaking his heart and prompts him to marry Claudia. The now-pregnant Amor was banished from the Buenavista hacienda and she returns to her mother in Manila, who was living at the Payatas dumpsite. She vows revenge on the Buenavista family when she learns that Eduardo has married Claudia.",
+            "id_author" : 2,
+            "id_genre" : 1,
+            "image": "https://i.ytimg.com/vi/bF73VM91NPU/maxresdefault.jpg"
+        },
+        {
+            "id" : 10,
+            "title" : "The Liar and His Love",
+            "description" : "The story begins with the romance between Amor de Jesús (Eula Valdez) and Eduardo Buenavista (Tonton Gutierrez). Eduardo's mother, Doña Benita (Liza Lorena), opposes the relationship since Amor was a housemaid and because she wanted Eduardo to marry Claudia Zalameda (Jean Garcia) for political reasons. Doña Benita asked Eduardo's older brother, Diego (Jestoni Alarcon), who was also attracted to Amor, to separate them. Upon seeing Diego trying to rape Amor, Eduardo mistook it as them having a relationship, breaking his heart and prompts him to marry Claudia. The now-pregnant Amor was banished from the Buenavista hacienda and she returns to her mother in Manila, who was living at the Payatas dumpsite. She vows revenge on the Buenavista family when she learns that Eduardo has married Claudia.",
+            "id_author" : 2,
+            "id_genre" : 1,
+            "image": "https://kdramakisses.files.wordpress.com/2017/04/liarandhislover.jpg"
+        },
+        {
+            "id" : 10,
+            "title" : "A Love So Beautifull",
+            "description" : "Chen Xiaoxi (Shen Yue) and Jiang Chen (Hu Yitian) are classmates at Chenxi Secondary School, and have been neighbors since kindergarten. Chen Xiaoxi, a cheerful girl who doesn't study much, is expressive about her admiration towards Jiang Chen, a popular student known for his good looks and high grades. However, Jiang Chen is very distant and indifferent towards people because of his father's early death. Together with their friends—the funny yet dirty-minded Lu Yang, athletic but blunt Lin Jingxiao, and joyful national swimmer Wu Bosong—Chen Xiaoxi and Jiang Chen prepare for their Gaokao, a university entry examination, during their journey through secondary school and towards adulthood.",
+            "id_author" : 2,
+            "id_genre" : 1,
+            "image": "https://pm1.narvii.com/6694/562c839d5cf928d3212e053da62ff50fa07403e1_hq.jpg"
+        },
+        {
+            "id" : 11,
+            "title" : "Moon Lovers: Scarlet Heart Ryeo",
+            "description" : "During a total solar eclipse, a 25-year-old 21st-century woman, Go Ha-jin (Lee Ji-eun), is transported back in time to the Goryeo Dynasty. She wakes up in the year of 941 in the body of Hae Soo, among the many royal princes of the ruling Wang family. She initially falls in love with the gentle and warm-hearted 8th Prince Wang Wook (Kang Ha-neul), and later Wang So (Lee Joon-gi), the fearsome 4th Prince who hides his face behind a mask and is given the derogatory label of 'wolf dog.' As the story develops, Hae Soo finds herself unwittingly caught between the rivalry and politics among the princes over the fight for the throne.",
+            "id_author" : 2,
+            "id_genre" : 1,
+            "image": "http://blog.asianwiki.com/wp-content/uploads/2016/08/Moon-Lovers.jpg"
+        }
+    ]
+}

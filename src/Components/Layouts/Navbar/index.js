@@ -6,8 +6,8 @@ class Navbar extends Component {
     constructor() {
         super();
         this.state = {
-            isAdmin: false,
-            isLogin: true
+            isAdmin: true,
+            isLogin: false
         }
     }
     render() {
@@ -19,12 +19,9 @@ class Navbar extends Component {
                 <div className="nav__link">
                     <a href="/" className="active">Home</a>
                     {isAdmin ?
-                        <>
-                            <a href="/database">Upload</a>
-                            <a href="/database">Database</a>
-                        </>
+                        <a href="/database">Database</a>
                         :
-                        <a href="/database">My Book</a>
+                        <a href="/my-book">My Book</a>
                     }
                 </div>
 

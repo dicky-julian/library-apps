@@ -56,10 +56,20 @@
         width: 100%;
         left: 0;
         .nav__link, .nav__tool {
-            a {
+            a, .auth__toogle {
                 padding: 20px;
             }
         }
+    }
+    #user__modal, #auth__modal {
+        top: 75px;
+        right: 10px;
+    }
+    #user__modal .arrow__helper {
+        right: 30px;
+    }
+    #auth__modal .arrow__helper {
+        right: 20px !important;
     }
     .product__list > .product {
         width: 49%;
