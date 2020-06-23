@@ -4,17 +4,21 @@
         margin: -140px 0 0;
         padding-left: 5%;
         overflow-x: auto;
-        > div {
+
+        >div {
             min-width: 300px;
             margin-right: 5px;
+
             &:nth-child(1) {
                 min-width: 250px;
                 margin-right: 20px;
             }
         }
+
         &::-webkit-scrollbar {
             height: 8px;
         }
+
         &::-webkit-scrollbar-thumb {
             background: #dbdbde;
         }
@@ -27,16 +31,20 @@
             margin-top: 65px !important;
         }
     }
+
     .product__tools {
         justify-content: center !important;
         padding-bottom: 12px;
         border-bottom: 1px solid #dbdbde;
+
         .bt {
             margin-top: 65px;
             position: absolute;
+
             &:nth-child(1) {
                 left: 5%
             }
+
             &:nth-child(3) {
                 right: 5%;
             }
@@ -45,7 +53,8 @@
 
     .product__list {
         margin-top: 70px;
-        > .product {
+
+        >.product {
             width: 32.5%;
         }
     }
@@ -55,20 +64,37 @@
     #nav {
         width: 100%;
         left: 0;
-        .nav__link, .nav__tool {
-            a, .auth__toogle {
+
+        .nav__link,
+        .nav__tool {
+
+            a,
+            .auth__toogle {
                 padding: 20px;
             }
+
             .auth__toogle {
                 padding-right: 0;
             }
         }
     }
-    #user__modal, #auth__modal {
+
+    #user__modal,
+    #auth__modal {
         top: 75px;
     }
-    .product__list > .product {
+
+    .product__list>.product {
         width: 49%;
+    }
+
+    // Book Page
+    .book {
+        padding-top: 59px;
+
+        .book__detail>div:nth-child(1) {
+            margin-top: -110px;
+        }
     }
 }
 
@@ -79,8 +105,73 @@
         margin: 0 -5%;
         padding-left: 5%;
         justify-content: flex-start !important;
+
         &::-webkit-scrollbar {
             display: none;
+        }
+    }
+
+    .book {
+        .book__detail {
+            flex-direction: column;
+            > div {
+                width: 100% !important;
+
+                &:nth-child(1) {
+                    .book__img {
+                        width: 300px;
+                        height: 300px;
+                        margin: -40px auto 0;
+                        padding-top: 0;
+                    }
+                    .detail__list {
+                        display: flex;
+                        flex-wrap: wrap;
+                        margin-top: 20px;
+                        div {
+                            width: 50%;
+                        }
+                    }
+                }
+
+                &:nth-child(2) {
+                    margin: 0;
+                    div {
+                        &:nth-child(1) {
+                            .detail__info {
+                                width: 100%;
+                                color: #000;
+                                div {
+                                    display: flex;
+                                    flex-direction: column-reverse;
+                                    width: 50%;
+                                    margin: 20px 0 0;
+                                    h3 {
+                                        font-size: 16px;
+                                        font-weight: 300;
+                                    }
+                                    h6 {
+                                        font-weight: 700;
+                                    }
+                                }
+                            }
+                        }
+                        &:nth-child(2) {
+                            h3 {
+                                font-size: 25px;
+                            }
+                            h6 {
+                                text-align: justify;
+                            }
+                        }
+                    }
+                    button {
+                        position: fixed;
+                        bottom: 20px;
+                        width: 90%;
+                    }
+                }
+            }
         }
     }
 }
@@ -89,12 +180,15 @@
     .nav__link {
         margin-left: 5%;
     }
-    .home__header > h1 {
+
+    .home__header>h1 {
         margin-top: -50px;
     }
+
     .product__list {
         .product {
             width: 100%;
+
             img {
                 height: 250px;
             }

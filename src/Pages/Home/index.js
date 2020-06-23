@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ProductList from '../../Components/Elements/ProductList';
 import Modal, { modalToogle } from '../../Components/Elements/Modal';
+import dummy from '../../dummy.json';
 
 // icons
 import SearchIcon from '@material-ui/icons/Search';
@@ -87,7 +88,7 @@ class Home extends Component {
                     </Modal>
 
                     {/* LIST of ALL BOOK */}
-                    <ProductList />
+                    <ProductList data={dummy.book}/>
                 </div>
             </>
         )

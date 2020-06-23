@@ -11,7 +11,7 @@ const Router = () => {
         <div className="wrapper">
             <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/:id" component={Book} />
+                <Route exact path="/book/:id" component={Book} />
                 <Route path="*" component={Error404} />
             </Switch>
         </div>

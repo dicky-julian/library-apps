@@ -1,0 +1,105 @@
+.book {
+    padding-top: 69px;
+
+    .book__header {
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+
+        div {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.432);
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
+        }
+    }
+
+    .book__detail {
+        display: flex;
+        padding: 0 5%;
+        background: #fff;
+        position: relative;
+
+        >div {
+            &:nth-child(1) {
+                width: 350px;
+                margin-top: -140px;
+
+                .book__img {
+                    width: 100%;
+                    padding-top: 100%;
+                    border-radius: 10px;
+                }
+
+                .detail__list {
+                    div {
+                        margin-top: 20px;
+                    }
+                }
+            }
+
+            &:nth-child(2) {
+                width: 100%;
+                margin: -90px 0 0 50px;
+
+                >div {
+                    &:nth-child(1) {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: flex-end;
+
+                        .detail__info {
+                            display: flex;
+                            color: #fff;
+
+                            div {
+                                margin-right: 50px;
+
+                                h3,
+                                h6 {
+                                    margin: 0;
+                                }
+                            }
+                        }
+
+                        button {
+                            height: fit-content;
+                            padding: 15px 40px;
+                            background: #dad272;
+
+                            &:hover {
+                                background: #c7bf65;
+                            }
+                        }
+                    }
+
+                    &:nth-child(2) {
+                        margin-top: 60px;
+
+                        h3 {
+                            margin: 20px 0;
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .product__highlight {
+        margin: 0 5%;
+    }
+
+    h6 {
+        display: block;
+        margin: 0;
+        font-size: 16px;
+        line-height: 26px;
+        font-weight: 300;
+    }
+
+    hr {
+        margin: 30px 5%;
+    }
+}

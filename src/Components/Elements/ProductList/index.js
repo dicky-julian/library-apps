@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import dummy from '../../../dummy.json';
 import './productList.scss';
 
 class ProductList extends Component {
     render() {
-        const datas = dummy.book;
+        const datas = this.props.data;
         return (
             <div className="product__list">
                 {

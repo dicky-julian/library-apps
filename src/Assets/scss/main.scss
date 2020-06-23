@@ -58,8 +58,9 @@ hr {
 
 .bt {
     padding: 10px 25px;
-    border: 1px solid;
+    border: 1px solid transparent;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .bt__primary {
@@ -82,15 +83,15 @@ hr {
 }
 
 .fw__bold {
-    font-weight: 700;
+    font-weight: 700 !important;
 }
 
 .fw__medium {
-    font-weight: 500;
+    font-weight: 500 !important;
 }
 
 .fw__thin {
-    font-weight: 300;
+    font-weight: 300 !important;
 }
 
 // navbar
