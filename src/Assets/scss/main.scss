@@ -51,9 +51,9 @@ hr {
 
 // general class
 .bg__setup {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
 }
 
 .bt {
@@ -99,8 +99,8 @@ hr {
     justify-content: space-between;
     align-items: center;
     position: absolute;
-    width: 86%;
-    left: 7%;
+    width: 90%;
+    left: 5%;
     background: #000;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 
@@ -133,7 +133,7 @@ hr {
         display: flex;
         align-items: center;
 
-        > div {
+        .profile__toogle {
             width: 35px;
             height: 35px;
             margin-right: 35px;
@@ -141,8 +141,106 @@ hr {
             background: #fff;
         }
 
-        > a {
+        .auth__toogle {
+            @extend .ft__up,
+            .c__pointer;
+            padding: 25px;
+            color: rgb(204, 204, 204);
             background: #323537;
+            transition: .4s;
+
+            &:hover {
+                background: #282a2b;
+            }
+        }
+    }
+}
+
+// Auth Form
+#user__modal {
+    top: 85px;
+    right: 0;
+    background: #36393f;
+    color: #8e9297;
+
+    .arrow__helper {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: -8px;
+        right: 40px;
+        background: #36393f;
+        transform: rotate(45deg);
+    }
+
+    > a,
+    h6 {
+        margin: 0;
+        padding: 15px 60px 0 15px !important;
+        color: #cccccc;
+        &:hover {
+            color: #fff;
+        }
+    }
+
+    > h6 {
+        margin-bottom: 15px;
+    }
+}
+
+#auth__modal {
+    @extend #user__modal;
+    .arrow__helper {
+        right: 30px !important;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+
+        label {
+            margin: 20px 0 7px;
+        }
+
+        input {
+            width: 250px;
+            padding: 10px;
+            background: #313339;
+            color: #8e9297;
+            border: 1px solid rgb(41, 41, 41);
+            border-radius: 5px;
+            transition: .3s;
+
+            &:focus {
+                outline-width: 0;
+                border-color: #bdb6658f;
+            }
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            color: #000;
+            font-weight: 500;
+            background: #dad272;
+            border: none;
+            border-radius: 5px;
+            transition: .3s;
+
+            &:hover {
+                background: #c7bf65;
+            }
+        }
+
+        p {
+            margin: 10px 0 20px;
+
+            b {
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
         }
     }
 }
