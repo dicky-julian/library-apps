@@ -23,9 +23,6 @@ class Navbar extends Component {
                         :
                         <a href="/my-book">My Book</a>
                     }
-                </div>
-
-                <div className="nav__tool">
                     {isLogin ?
                         <>
                             <div className="profile__toogle bg__setup c__pointer" onClick={() => modalToogle("user__modal")} style={{ backgroundImage: "url('https://lastfm-img2.akamaized.net/i/u/avatar170s/644df4fa78ad0090e7ce60fa11665cfa')" }}></div>

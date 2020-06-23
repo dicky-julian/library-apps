@@ -63,13 +63,6 @@
     }
     #user__modal, #auth__modal {
         top: 75px;
-        right: 10px;
-    }
-    #user__modal .arrow__helper {
-        right: 30px;
-    }
-    #auth__modal .arrow__helper {
-        right: 20px !important;
     }
     .product__list > .product {
         width: 49%;
@@ -90,9 +83,6 @@
 }
 
 @media screen and (max-width: 450px) {
-    .nav__title {
-        display: none;
-    }
     .nav__link {
         margin-left: 5%;
     }
@@ -102,6 +92,9 @@
     .product__list {
         .product {
             width: 100%;
+            img {
+                height: 250px;
+            }
         }
     }
 }

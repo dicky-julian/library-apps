@@ -99,26 +99,35 @@ hr {
     justify-content: space-between;
     align-items: center;
     position: absolute;
-    width: 90%;
-    left: 5%;
+    width: 100%;
     background: #000;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 
     .nav__title {
-        margin-left: 35px;
+        margin-left: 5%;
         color: #fff;
     }
 
     .nav__link {
-        a {
+        display: flex;
+        align-items: center;
+        margin-right: 5%;
+        a, .auth__toogle {
             @extend .ft__up;
-            display: inline-flex;
             padding: 25px;
             color: rgb(204, 204, 204);
-
+            cursor: pointer;
             &:hover {
                 color: #fff;
             }
+        }
+
+        .profile__toogle {
+            width: 35px;
+            height: 35px;
+            margin-left: 35px;
+            border-radius: 50%;
+            background: #fff;
         }
 
         .active {
@@ -127,39 +136,13 @@ hr {
             border-bottom: 2px solid #fff;
         }
     }
-
-    .nav__tool {
-        @extend .nav__link;
-        display: flex;
-        align-items: center;
-
-        .profile__toogle {
-            width: 35px;
-            height: 35px;
-            margin-right: 35px;
-            border-radius: 50%;
-            background: #fff;
-        }
-
-        .auth__toogle {
-            @extend .ft__up,
-            .c__pointer;
-            padding: 25px;
-            color: rgb(204, 204, 204);
-            background: #323537;
-            transition: .4s;
-
-            &:hover {
-                background: #282a2b;
-            }
-        }
-    }
 }
 
 // Auth Form
 #user__modal {
     top: 85px;
-    right: 0;
+    right: 3%;
+    padding: 25px 0;
     background: #36393f;
     color: #8e9297;
 
@@ -168,7 +151,7 @@ hr {
         height: 20px;
         position: absolute;
         top: -8px;
-        right: 40px;
+        right: 35px;
         background: #36393f;
         transform: rotate(45deg);
     }
@@ -176,24 +159,18 @@ hr {
     > a,
     h6 {
         margin: 0;
-        padding: 15px 60px 0 15px !important;
+        padding: 20px 60px 0 15px !important;
         color: #cccccc;
         &:hover {
             color: #fff;
         }
     }
-
-    > h6 {
-        margin-bottom: 15px;
-    }
 }
 
 #auth__modal {
+    padding: 0;
+    right: 5%;
     @extend #user__modal;
-    .arrow__helper {
-        right: 30px !important;
-    }
-
     form {
         display: flex;
         flex-direction: column;
