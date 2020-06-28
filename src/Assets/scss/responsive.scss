@@ -126,7 +126,6 @@
         }
 
         .nav__link {
-            display: none;
             top: 75px;
             right: -5px;
             flex-direction: column;
@@ -164,6 +163,10 @@
             .auth__toogle {
                 padding: 25px 100px 0 15px;
             }
+        }
+
+        .hide {
+            display: none;
         }
 
         .profile__toogle {
@@ -319,6 +322,12 @@
             }
         }
     }
+
+    // MODAL
+    #auth__modal {
+        top: 170px;
+        right: 0;
+    }
 }
 
 @media screen and (max-width: 450px) {
@@ -327,7 +336,7 @@
     }
 
     .home__header>h1 {
-        margin-top: -50px;
+        margin: -50px 5% 0.67em;
     }
 
     .product__list {

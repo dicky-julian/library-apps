@@ -9,7 +9,7 @@ class Navbar extends Component {
         super(props);
         this.state = {
             isAdmin: true,
-            isLogin: false
+            isLogin: true
         }
     }
 
@@ -23,15 +23,12 @@ class Navbar extends Component {
 
     toogleNav = () => {
         const el = document.querySelector(".nav__link");
-        const status = el.style.display;
+        const elHide = document.querySelector("#nav .hide");
 
-        if (status) {
-            status === "flex" ?
-                el.style.display = "none"
-                :
-                el.style.display = "flex"
+        if (elHide) {
+            el.classList.remove("hide");
         } else {
-            el.style.display = "flex";
+            el.classList.add("hide");
         }
     }
 
@@ -42,6 +39,8 @@ class Navbar extends Component {
             }))
         })
         this.setActiveNav();
+
+        document.querySelector("#loading").remove();
     }
 
     render() {
@@ -50,7 +49,7 @@ class Navbar extends Component {
         return (
             <div id="nav">
                 <div className="nav__title"><b>Librarian</b></div>
-                <div className="nav__link">
+                <div className="nav__link hide">
                     <div className="arrow__helper"></div>
                     <Link to="/" className="/" onClick={this.setActiveNav()}>Home</Link>
                     {isAdmin ?

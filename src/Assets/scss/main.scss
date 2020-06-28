@@ -17,12 +17,6 @@ html {
     font-family: leelawade;
 }
 
-body,
-div {
-    margin: 0;
-    padding: 0;
-}
-
 div {
     &::-webkit-scrollbar {
         height: 8px;

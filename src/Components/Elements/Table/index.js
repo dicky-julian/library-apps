@@ -43,7 +43,7 @@ class Table extends Component {
                                                     :
                                                     <div className="disable">Unavailable</div>
                                                     :
-                                                    <div></div>
+                                                    <></>
                                                 }
                                             </div>
                                         </td>
