@@ -14,14 +14,6 @@
                 margin-right: 20px;
             }
         }
-
-        &::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background: #dbdbde;
-        }
     }
 }
 
@@ -58,6 +50,29 @@
             width: 32.5%;
         }
     }
+
+    .database__header>div>a {
+        width: calc(50% - 45px);
+        margin-bottom: 10px;
+        padding: 20px;
+    }
+
+    .database__content {
+        .tools {
+            >div {
+                >div {
+                    height: 35px;
+                    width: 35px;
+                    margin-left: 5px;
+
+                    &:nth-child(1).able,
+                    &:nth-child(1).disable {
+                        width: 35px;
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 750px) {
@@ -79,6 +94,10 @@
         }
     }
 
+    .wrapper>div:nth-child(1) {
+        margin-top: 59px;
+    }
+
     #user__modal,
     #auth__modal {
         top: 75px;
@@ -90,8 +109,6 @@
 
     // Book Page
     .book {
-        padding-top: 59px;
-
         .book__detail>div:nth-child(1) {
             margin-top: -110px;
         }
@@ -99,6 +116,78 @@
 }
 
 @media screen and (max-width: 650px) {
+    // NAVBAR
+    #nav {
+        >div:nth-child(3) {
+            display: flex !important;
+            #user__modal {
+                right: 60px;
+            }
+        }
+
+        .nav__link {
+            display: none;
+            top: 75px;
+            right: -5px;
+            flex-direction: column;
+            align-items: flex-start;
+            position: absolute;
+            padding-bottom: 25px;
+            background: #36393f;
+            color: #8e9297;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.04);
+            z-index: 99;
+
+            a {
+                margin: 0;
+                padding: 25px 100px 0 15px !important;
+                color: #cccccc;
+
+                &.active {
+                    border-bottom: 0;
+                }
+            }
+
+            .arrow__helper {
+                display: block;
+                width: 20px;
+                height: 20px;
+                position: absolute;
+                top: -8px;
+                right: 16px;
+                background: #36393f;
+                transform: rotate(45deg);
+            }
+
+            .auth__toogle {
+                padding: 25px 100px 0 15px;
+            }
+        }
+
+        .profile__toogle {
+            margin-right: 15px;
+        }
+
+        #toogle_nav {
+            display: block !important;
+            margin: 10px 5%;
+            cursor: pointer;
+
+            svg {
+                font-size: 35px;
+                color: #fff;
+            }
+        }
+
+        .home__header {
+            padding: 0 5%;
+        }
+    }
+
+    // HOME
+
     .genre__list {
         overflow-x: auto;
         width: 110%;
@@ -111,10 +200,13 @@
         }
     }
 
+    // BOOK
+
     .book {
         .book__detail {
             flex-direction: column;
-            > div {
+
+            >div {
                 width: 100% !important;
 
                 &:nth-child(1) {
@@ -124,10 +216,12 @@
                         margin: -40px auto 0;
                         padding-top: 0;
                     }
+
                     .detail__list {
                         display: flex;
                         flex-wrap: wrap;
                         margin-top: 20px;
+
                         div {
                             width: 50%;
                         }
@@ -136,40 +230,91 @@
 
                 &:nth-child(2) {
                     margin: 0;
+
                     div {
                         &:nth-child(1) {
                             .detail__info {
                                 width: 100%;
                                 color: #000;
+
                                 div {
                                     display: flex;
                                     flex-direction: column-reverse;
                                     width: 50%;
                                     margin: 20px 0 0;
+
                                     h3 {
                                         font-size: 16px;
                                         font-weight: 300;
                                     }
+
                                     h6 {
                                         font-weight: 700;
                                     }
                                 }
                             }
                         }
+
                         &:nth-child(2) {
                             h3 {
                                 font-size: 25px;
                             }
+
                             h6 {
                                 text-align: justify;
                             }
                         }
                     }
+
                     button {
                         position: fixed;
                         bottom: 20px;
                         width: 90%;
                     }
+                }
+            }
+        }
+    }
+
+    // DATABASE
+
+    .database {
+        h4 {
+            font-size: 20px;
+        }
+
+        .database__header {
+            >div {
+                flex-wrap: nowrap;
+                justify-content: unset;
+                overflow-x: auto;
+                margin: 0px -5%;
+                padding-left: 5%;
+    
+                a {
+                    min-width: 250px;
+                    margin-right: 10px;
+                    padding: 15px 20px;
+                    h5 {
+                        font-size: 16px;
+                    }
+                    
+                    h6 {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    
+        .database__content {
+            table {
+                td:nth-child(3) {
+                    display: none;
+                }
+    
+                img {
+                    width: 60px;
+                    height: 60px;
                 }
             }
         }
@@ -190,8 +335,16 @@
             width: 100%;
 
             img {
-                height: 250px;
+                height: 200px;
             }
         }
+    }
+
+    .database h4 {
+        font-size: 20px;
+    }
+
+    .database__header > h4 {
+        margin-top: 10px;
     }
 }
