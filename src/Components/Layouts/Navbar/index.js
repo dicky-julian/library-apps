@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { withRouter, Link } from "react-router-dom";
 import Modal, { modalToogle } from '../../Elements/Modal';
 import Auth from '../../../Pages/Auth';
-import { MenuIcon } from '../../Elements/Icons';
+import { ExitToAppIcon, MenuIcon } from '../../Elements/Icons';
 
 class Navbar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isAdmin: true,
+            isAdmin: false,
             isLogin: true
         }
     }
@@ -73,8 +73,14 @@ class Navbar extends Component {
                         <div className="profile__toogle bg__setup c__pointer" onClick={() => modalToogle("user__modal")} style={{ backgroundImage: "url('https://lastfm-img2.akamaized.net/i/u/avatar170s/644df4fa78ad0090e7ce60fa11665cfa')" }}></div>
                         <Modal id="user__modal">
                             <div className="arrow__helper"></div>
-                            <a href="/" className="ft__up">Profile</a>
-                            <h6 className="c__pointer ft__up fw__thin">Logout</h6>
+                            <div>
+                                <img src="https://lastfm-img2.akamaized.net/i/u/avatar170s/644df4fa78ad0090e7ce60fa11665cfa" alt=""/>
+                                <h6>Lee Ji Eun</h6>
+                                <p>Member</p>
+                            </div>
+                            <div>
+                                <ExitToAppIcon /> Logout
+                            </div>
                         </Modal>
                         <div id="toogle_nav" onClick={() => this.toogleNav()} ><MenuIcon /></div>
                     </div>

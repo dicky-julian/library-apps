@@ -132,7 +132,6 @@ hr {
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        width: 100px;
         margin-right: 5%;
         #toogle_nav {
             display: none;
@@ -188,7 +187,7 @@ hr {
 #user__modal {
     top: 85px;
     right: 3%;
-    padding: 25px 0;
+    width: 225px;
     background: #36393f;
     color: #8e9297;
 
@@ -202,22 +201,59 @@ hr {
         transform: rotate(45deg);
     }
 
-    >a,
-    h6 {
-        margin: 0;
-        padding: 20px 60px 0 15px !important;
-        color: #cccccc;
-
-        &:hover {
-            color: #fff;
+    > div {
+        &:nth-child(2) {
+            padding: 25px 0;
+            text-align: center;
+            border-bottom: 1px solid #484a4e;
+            img {
+                display: unset;
+                width: 75px;
+                height: 75px;
+                object-fit: cover;
+                border: 2px solid #fff;
+                border-radius: 50%;
+            }
+            h6 {
+                margin: 5px 0 0;
+                font-size: 16px;
+            }
+            p {
+                margin: 0;
+            }
+        }
+        &:nth-child(3) {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            transition: .3s;
+            cursor: pointer;
+            &:hover {
+                background: #2b2e31;
+            }
+            svg {
+                margin-right: 15px;
+            }
         }
     }
 }
 
 #auth__modal {
-    padding: 0;
+    top: 85px;
     right: 5%;
-    @extend #user__modal;
+    padding: 25px 0;
+    background: #36393f;
+    color: #8e9297;
+
+    .arrow__helper {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: -8px;
+        right: 35px;
+        background: #36393f;
+        transform: rotate(45deg);
+    }
 
     form {
         display: flex;

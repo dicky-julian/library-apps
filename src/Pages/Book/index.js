@@ -4,6 +4,9 @@ import './book.scss';
 import dummy from '../../dummy.json';
 
 class Book extends Component {
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
     render() {
         const datas = [];
         const data = dummy.book[this.props.match.params.id]

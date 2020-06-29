@@ -26,7 +26,7 @@ class Home extends Component {
                 <div className="product__toplist">
                     <div className="product__desc">
                         <h4>Top of the last week</h4>
-                        <p>The most desired movies of the last week</p>
+                        <p>The most desired books of the last week</p>
                     </div>
                     <div className="product">
                         <img src="https://www.dramamilk.com/wp-content/uploads/2019/11/Hotel-del-luna-poster-best-drama-1.jpg" alt="" />

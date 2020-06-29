@@ -120,9 +120,7 @@
     #nav {
         >div:nth-child(3) {
             display: flex !important;
-            #user__modal {
-                right: 60px;
-            }
+            width: 100%;
         }
 
         .nav__link {
@@ -327,6 +325,13 @@
     #auth__modal {
         top: 170px;
         right: 0;
+    }
+
+    #user__modal {
+        right: 10%;
+        .arrow__helper {
+            right: 65px;
+        }
     }
 }
 
