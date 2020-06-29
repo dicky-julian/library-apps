@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import Home from '../Pages/Home';
 import Book from '../Pages/Book';
 import Database from '../Pages/Database';
+import MyBook from '../Pages/MyBook';
 import Error404 from '../Pages/Error/404';
 
 const Router = () => {
@@ -14,6 +15,7 @@ const Router = () => {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/book/:id" component={Book} />
                 <Route exact path="/database" component={Database} />
+                <Route exact path="/mybook" component={MyBook} />
                 <Route path="*" component={Error404} />
             </Switch>
         </div>

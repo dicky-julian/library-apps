@@ -111,30 +111,30 @@
 .home__body {
     margin-top: 80px;
     padding: 0 5%;
+}
 
-    // GENRE of BOOK
-    .product__tools {
+// GENRE of BOOK
+.product__tools {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+
+    .genre__list {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 50px;
+        justify-content: center;
 
-        .genre__list {
-            display: flex;
-            justify-content: center;
+        >div {
+            padding: 10px 25px;
+            color: #000;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-            >div {
-                padding: 10px 25px;
-                color: #000;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-
-            >.active {
-                background: #323537;
-                color: #fff;
-                font-weight: bold;
-            }
+        >.active {
+            background: #323537;
+            color: #fff;
+            font-weight: bold;
         }
     }
 }

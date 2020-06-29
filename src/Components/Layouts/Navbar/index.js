@@ -55,7 +55,7 @@ class Navbar extends Component {
                     {isAdmin ?
                         <Link to="/database" className="/database">Database</Link>
                         :
-                        <Link to="/my-book" className="/my-book">My Book</Link>
+                        <Link to="/mybook" className="/mybook">My Book</Link>
                     }
                     {isLogin ?
                         <></>

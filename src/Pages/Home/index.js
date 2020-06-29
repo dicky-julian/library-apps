@@ -76,9 +76,6 @@ class Home extends Component {
                     <Modal id="sort__tools">
                         <h6>Title</h6>
                         <h6 className="active">Date Time</h6>
-                        <hr />
-                        <h6 className="active">A - Z</h6>
-                        <h6>Z - A</h6>
                     </Modal>
 
                     <Modal id="filter__tools">
