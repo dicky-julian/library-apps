@@ -189,6 +189,12 @@
 
     // HOME
 
+    .my_book {
+        .genre__list {
+            justify-content: center !important;
+        }
+    }
+
     .genre__list {
         overflow-x: auto;
         width: 110%;

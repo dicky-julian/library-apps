@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ProductList from '../../Components/Elements/ProductList';
 import Modal, { modalToogle } from '../../Components/Elements/Modal';
 import dummy from '../../dummy.json';
+import api from '../../Utils/fetch';
+import axios from 'axios';
 
 // icons
 import SearchIcon from '@material-ui/icons/Search';
@@ -10,7 +12,44 @@ import SearchIcon from '@material-ui/icons/Search';
 import './home.scss';
 
 class Home extends Component {
+    constructor() {
+        super();
+        this.state = {
+            data: ''
+        }
+    }
+
+    fetchBook = () => {
+        api.getBook()
+            .then(res => {
+                console.log(res);
+                this.setState({data: res.data});
+            })
+            .catch(err => {
+                console.log(err.message);
+            })
+    }
+
+    componentDidMount() {
+        // this.fetchBook();
+        axios({
+            method: 'GET',
+            url: 'http://localhost:3000/author',
+            headers: {
+                Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE1OTM1MTYxMDQsImV4cCI6MTU5MzU0NzEwNH0.l9a7xSaUToB-PHd-jkDZbuVW-SPfK_wfU1GBWJw7J1M'
+            }
+        })
+        .then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err)
+            console.log(err.response)
+        })
+    }
+
     render() {
+        console.log(this.state.data);
         return (
             <>
                 {/* HEADER */}
