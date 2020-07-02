@@ -1,61 +1,119 @@
 import React, { Component } from 'react';
-import ProductList from '../../Components/Elements/ProductList';
+import { Link }  from 'react-router-dom';
+import Empty from '../Empty';
+import Product from '../../Components/Elements/Product';
 import Modal, { modalToogle } from '../../Components/Elements/Modal';
-import dummy from '../../dummy.json';
-import api from '../../Utils/fetch';
-import axios from 'axios';
+import { getBook, getGenre, compareValues } from '../../Utils/Api/index';
 
 // icons
 import SearchIcon from '@material-ui/icons/Search';
 
-// style
+// assets
 import './home.scss';
 
 class Home extends Component {
     constructor() {
         super();
         this.state = {
-            data: ''
+            dataBook: '',
+            dataBookGenre: '',
+            dataBookFavorite: '',
+            dataGenre: '',
         }
     }
 
     fetchBook = () => {
-        api.getBook()
+        getBook()
             .then(res => {
-                console.log(res);
-                this.setState({data: res.data});
+                this.setState({ dataBook: res.data });
             })
             .catch(err => {
-                console.log(err.message);
+                console.log(err.response);
             })
+    }
+
+    fetchFavoriteBook = (order, orderType, limit) => {
+        getBook(null, order, orderType, limit)
+            .then(res => {
+                this.setState({ dataBookFavorite: res.data })
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
+    }
+
+    fetchGenre = () => {
+        getGenre()
+            .then(res => {
+                this.setState({ dataGenre: res.data })
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
+    }
+
+    handleSearch = (e) => {
+        e.preventDefault();
+        const search = document.querySelector("#form__search>input").value;
+
+        if (search) this.props.history.push(`/book?search=${search}`);
+    }
+
+    handleGenreList = () => {
+        const els = document.querySelectorAll(".genre__list > div");
+        const activeEls = document.querySelector(".genre__list > .active");
+        const data = this.state.dataBook;
+        if (els.length > 1) {
+            els.forEach((el) => {
+                el.addEventListener("click", ((e) => {
+                    const id = e.target.dataset.id;
+                    if (activeEls) {
+                        activeEls.classList.remove("active");
+                        e.target.classList.add("active");
+                    }
+                    if (id && data) {
+                        const newData = data.filter(el => el.id_genre === parseInt(id));
+                        this.setState({dataBookGenre: newData});
+                    }
+                     else {
+                        this.setState({dataBookGenre: ''});
+                    }
+                }))
+            })
+        }
+    }
+
+    sortTools = (e, key) => {
+        const activeEl = document.querySelector("#sort__tools>.active");
+        if (activeEl) activeEl.classList.remove("active");
+        e.target.classList.add("active");
+        modalToogle("sort__tools");
+        let data = this.state.dataBook;
+        let newData = '';
+        if (data) {
+            newData = this.state.dataBook.sort(compareValues(key, 'desc'));
+        }
+        this.setState({dataBookGenre: newData});
     }
 
     componentDidMount() {
-        // this.fetchBook();
-        axios({
-            method: 'GET',
-            url: 'http://localhost:3000/author',
-            headers: {
-                Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE1OTM1MTYxMDQsImV4cCI6MTU5MzU0NzEwNH0.l9a7xSaUToB-PHd-jkDZbuVW-SPfK_wfU1GBWJw7J1M'
-            }
-        })
-        .then(res => {
-            console.log(res);
-        })
-        .catch(err => {
-            console.log(err)
-            console.log(err.response)
-        })
+        this.fetchGenre();
+        this.fetchBook();
+        this.fetchFavoriteBook('rating', 'DESC', 3);
+    }
+
+    componentDidUpdate() {
+        this.handleGenreList();
     }
 
     render() {
-        console.log(this.state.data);
+        const ListBook = this.state.dataBookGenre || this.state.dataBook;
         return (
             <>
                 {/* HEADER */}
                 <div className="home__header bg__setup">
                     <h1 className="fw__thin">Find <b className="fw__medium">perfect</b> book for <b className="fw__medium">today</b></h1>
-                    <form>
+                    <form id="form__search" onSubmit={this.handleSearch}>
                         <input type="text" placeholder="What book are you looking for ?" required />
                         <SearchIcon className="icon c__pointer" />
                     </form>
@@ -67,30 +125,22 @@ class Home extends Component {
                         <h4>Top of the last week</h4>
                         <p>The most desired books of the last week</p>
                     </div>
-                    <div className="product">
-                        <img src="https://www.dramamilk.com/wp-content/uploads/2019/11/Hotel-del-luna-poster-best-drama-1.jpg" alt="" />
-                        <div>
-                            <h5><a href="cepu.com">Hotel del Luna</a></h5>
-                            Hotel del Luna adalah serial televisi Korea Selatan yang dibintangi ...
-                            <a href="/" className="fw__medium">Read more</a>
-                        </div>
-                    </div>
-                    <div className="product">
-                        <img src="http://www.jaehakim.com/wp-content/uploads/2555/04/DescendantsoftheSun-top.jpg" alt="" />
-                        <div>
-                            <h5><a href="/">Descendants of the Sun</a></h5>
-                            Drama ini disiarkan di KBS2 mulai 24 Februari hingga 14 April 2016 ...
-                            <a href="/" className="fw__medium">Read more</a>
-                        </div>
-                    </div>
-                    <div className="product">
-                        <img src="https://i.ytimg.com/vi/bF73VM91NPU/maxresdefault.jpg" alt="" />
-                        <div>
-                            <h5><a href="/">Pangako sa'yo</a></h5>
-                            Pangako sa 'yo is a TV series starring Kristine Hermosa, Jericho ...
-                            <a href="/" className="fw__medium">Read more</a>
-                        </div>
-                    </div>
+                    {this.state.dataBookFavorite ?
+                        this.state.dataBookFavorite.map((data, index) => {
+                            return (
+                                <div className="product" key={index}>
+                                    <img src={`http://localhost:3000/images/${data.image}`} alt="" />
+                                    <div>
+                                        <h5><Link to={`/book/${data.id}`}>{data.title}</Link></h5>
+                                        {data.description.substring(0, 90)}
+                                        <Link to={`/book/${data.id}`} className="fw__medium">Read more</Link>
+                                    </div>
+                                </div>
+                            )
+                        })
+                        :
+                        <></>
+                    }
                 </div>
 
                 <div className="home__body">
@@ -99,22 +149,23 @@ class Home extends Component {
                         <div className="bt bt__default c__pointer" onClick={() => modalToogle("sort__tools")}>
                             Sorts
                         </div>
-                        <div className="genre__list">
+                        <div id="genre__list" className="genre__list">
                             <div className="active">All</div>
-                            <div>Manga</div>
-                            <div>Novel</div>
-                            <div>Critism</div>
-                            <div>History</div>
-                            <div>Design</div>
-                            <div>Sains</div>
+                            {this.state.dataGenre ?
+                                this.state.dataGenre.map((data, index) => {
+                                    return (<div key={index} data-id={data.id}>{data.name}</div>)
+                                })
+                                :
+                                <></>
+                            }
                         </div>
                         <div className="bt bt__default c__pointer" onClick={() => modalToogle("filter__tools")}>Filters</div>
                     </div>
 
                     {/* SORT & FILTER COLLAPSE */}
                     <Modal id="sort__tools">
-                        <h6>Title</h6>
-                        <h6 className="active">Date Time</h6>
+                        <h6 onClick={(e) => this.sortTools(e, 'title')}>Title</h6>
+                        <h6 onClick={(e) => this.sortTools(e, 'rating')}>Rating</h6>
                     </Modal>
 
                     <Modal id="filter__tools">
@@ -124,7 +175,19 @@ class Home extends Component {
                     </Modal>
 
                     {/* LIST of ALL BOOK */}
-                    <ProductList data={dummy.book}/>
+                    <div className="product__list">
+                    {
+                        ListBook ?
+                        ListBook.length ?
+                        ListBook.map((data, index) => {
+                            return <Product data={data} key={index} />
+                        })
+                        :
+                        <Empty message="Cant find data" />
+                        :
+                        <Empty message="Cant find data" />
+                    }
+                    </div>
                 </div>
             </>
         )

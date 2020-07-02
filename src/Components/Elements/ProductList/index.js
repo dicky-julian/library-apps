@@ -8,15 +8,18 @@ class ProductList extends Component {
         return (
             <div className="product__list">
                 {
+                    datas ?
                     datas.map((data, index) => {
                         return (
                             <div className="product" key={index}>
-                                <img src={data.image} alt="" />
+                                <img src={`http://localhost:3000/images/${data.image}`} alt="" />
                                 <Link to={`/book/${index}`} className="fw__medium">{data.title}</Link>
                                 <p>{data.description.substring(0, 90)} ...</p>
                             </div>
                         )
                     })
+                    :
+                    <div>Empty Data</div>
                 }
             </div>
         )

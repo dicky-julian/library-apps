@@ -97,6 +97,10 @@ hr {
     cursor: pointer;
 }
 
+.c__disable {
+    cursor: no-drop;
+}
+
 .ft__cp {
     text-transform: capitalize;
 }
@@ -115,6 +119,22 @@ hr {
 
 .fw__thin {
     font-weight: 300 !important;
+}
+
+.txt__center {
+    text-align: center;
+}
+
+.empty {
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img {
+        width: 400px;
+    }
 }
 
 // navbar
@@ -183,6 +203,36 @@ hr {
     margin-top: 69px;
 }
 
+// Product
+.product__list {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    align-content: flex-end;
+
+    >.product {
+        width: 24%;
+        margin-bottom: 3em;
+
+        img {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        a {
+            font-size: 16px;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+    }
+}
 // Auth Form
 #user__modal {
     top: 85px;
@@ -215,10 +265,12 @@ hr {
                 border-radius: 50%;
             }
             h6 {
+                @extend .ft__cp;
                 margin: 5px 0 0;
                 font-size: 16px;
             }
             p {
+                @extend .ft__cp;
                 margin: 0;
             }
         }
@@ -241,7 +293,6 @@ hr {
 #auth__modal {
     top: 85px;
     right: 5%;
-    padding: 25px 0;
     background: #36393f;
     color: #8e9297;
 

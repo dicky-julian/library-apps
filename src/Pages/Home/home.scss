@@ -15,6 +15,7 @@
         color: #fff;
         text-align: center;
         font-weight: 100;
+
         >b {
             font-size: unset;
         }
@@ -129,6 +130,10 @@
             color: #000;
             border-radius: 5px;
             cursor: pointer;
+            -webkit-transition: all .2s linear;
+            -moz-transition: all .2s linear;
+            -o-transition: all .2s linear;
+            transition: all .2s linear;
         }
 
         >.active {
@@ -142,15 +147,19 @@
 #sort__tools {
     margin-top: 10px;
     padding: 5px 0;
+
     h6 {
         margin: 0;
         padding: 8px 100px 8px 20px;
         font-weight: 500;
+        cursor: pointer;
+
         &:hover {
             background: #f3f3f4;
         }
     }
-    > .active {
+
+    >.active {
         background: #f3f3f4;
     }
 }

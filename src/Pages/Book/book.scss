@@ -33,6 +33,9 @@
                 .detail__list {
                     div {
                         margin-top: 20px;
+                        h6 {
+                            text-transform: capitalize;
+                        }
                     }
                 }
             }
@@ -101,4 +104,8 @@
     hr {
         margin: 30px 5%;
     }
+}
+
+.empty__book .empty {
+    min-height: 85vh;
 }

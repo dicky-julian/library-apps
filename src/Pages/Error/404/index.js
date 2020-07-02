@@ -1,8 +1,12 @@
 import React from 'react';
+import Empty from '../../Empty';
+import './404.scss';
 
 const Error404 = () => {
     return (
-        <div>Error 404</div>
+        <div className="empty__page">
+            <Empty message="Page not Found" />
+        </div>
     )
 }
 

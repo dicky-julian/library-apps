@@ -1,68 +1,149 @@
 import React, { Component } from 'react';
-import ProductList from '../../Components/Elements/ProductList';
+import Empty from '../Empty';
+import Product from '../../Components/Elements/Product';
+import { getBook, getBookById, getAuthorById, getGenreById } from '../../Utils/Api/index';
+
+// assets
 import './book.scss';
-import dummy from '../../dummy.json';
 
 class Book extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            dataBook: '',
+            dataBookFavorite: '',
+            dataAuthor: '',
+            dataGenre: ''
+        }
+    }
+
     componentDidMount() {
+        const id = this.props.match.params.id;
+        this.fetchBook(id);
+        this.fetchFavoriteBook('rating', 'DESC', 4);
+
         window.scrollTo(0, 0);
     }
-    render() {
-        const datas = [];
-        const data = dummy.book[this.props.match.params.id]
-        for (let i=0; i<4; i++) {
-            datas.push(dummy.book[i]);
-        }
 
+    componentDidUpdate(prevProps) {
+        if (this.state.dataGenre.setId) this.fetchGenre(this.state.dataGenre.setId);
+        if (this.state.dataAuthor.setId) this.fetchAuthor(this.state.dataAuthor.setId);
+        if (this.props.location.pathname !== prevProps.location.pathname) {
+            window.location.reload();
+        }
+    }
+
+    fetchBook = (id) => {
+        getBookById(id)
+            .then(res => {
+                this.setState({ dataBook: res.data[0] });
+                this.setState({ dataGenre: { setId: res.data[0].id_genre } });
+                this.setState({ dataAuthor: { setId: res.data[0].id_author } });
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    fetchFavoriteBook = (order, orderType, limit) => {
+        getBook(null, order, orderType, limit)
+            .then(res => {
+                this.setState({ dataBookFavorite: res.data })
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
+    }
+
+    fetchAuthor = (id) => {
+        getAuthorById(id)
+            .then(res => {
+                this.setState({ dataAuthor: res.data[0] });
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    fetchGenre = (id) => {
+        getGenreById(id)
+            .then(res => {
+                this.setState({ dataGenre: res.data[0] });
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    render() {
+        const data = this.state.dataBook;
         return (
-            <div className="book">
-                <div className="book__header">
-                    <div className="bg__setup" style={{ backgroundImage: `url(${data.image})` }}></div>
-                </div>
-                <div className="book__detail">
-                    <div>
-                        <div className="book__img bg__setup" style={{ backgroundImage: `url(${data.image})` }}></div>
-                        <div className="detail__list">
+            data ?
+                <div className="book">
+                    <div className="book__header">
+                        <div className="bg__setup" style={{ backgroundImage: `url(http://localhost:3000/images/${data.image})` }}></div>
+                    </div>
+                    <div className="book__detail">
+                        <div>
+                            <div className="book__img bg__setup" style={{ backgroundImage: `url(http://localhost:3000/images/${data.image})` }}></div>
+                            <div className="detail__list">
+                                <div>
+                                    <h6 className="fw__bold">Author</h6>
+                                    <h6>{this.state.dataAuthor.name}</h6>
+                                </div>
+                                <div>
+                                    <h6 className="fw__bold">Genre</h6>
+                                    <h6>{this.state.dataGenre.name}</h6>
+                                </div>
+                                <div>
+                                    <h6 className="fw__bold">Release</h6>
+                                    <h6>{data.release_date}</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
                             <div>
-                                <h6 className="fw__bold">Author</h6>
-                                <h6>Masashi Kishimoto</h6>
+                                <div className="detail__info">
+                                    <div>
+                                        <h3>{data.rating}</h3>
+                                        <h6>Ratings</h6>
+                                    </div>
+                                    <div>
+                                        <h3>120</h3>
+                                        <h6>Borrowed</h6>
+                                    </div>
+                                </div>
+                                {data.status === 2 ?
+                                    <button className="bt fw__medium">borrow</button>
+                                    :
+                                    <button className="bt fw__medium c__disable" disabled>Out of Stock</button>
+                                }
                             </div>
                             <div>
-                                <h6 className="fw__bold">Genre</h6>
-                                <h6>Korean Drama</h6>
-                            </div>
-                            <div>
-                                <h6 className="fw__bold">Release</h6>
-                                <h6>2014</h6>
+                                <h3>{data.title}</h3>
+                                <h6>{data.description}</h6>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <div>
-                            <div className="detail__info">
-                                <div>
-                                    <h3>9.8</h3>
-                                    <h6>Ratings</h6>
-                                </div>
-                                <div>
-                                    <h3>120</h3>
-                                    <h6>Borrowed</h6>
-                                </div>
-                            </div>
-                            <button className="bt fw__medium">borrow</button>
-                        </div>
-                        <div>
-                            <h3>{data.title}</h3>
-                            <h6>{data.description}</h6>
+                    <hr />
+                    <div className="product__highlight">
+                        <h5>Popular Books</h5>
+                        <div className="product__list">
+                            {
+                                this.state.dataBookFavorite ?
+                                    this.state.dataBookFavorite.map((data, index) => {
+                                        return <Product data={data} key={index} />
+                                    })
+                                    :
+                                    <Empty message={`Cant find book's data with id ${this.props.match.params.id}`} />
+                            }
                         </div>
                     </div>
                 </div>
-                <hr/>
-                <div className="product__highlight">
-                    <h5>Popular Books</h5>
-                    <ProductList data={datas} />
+                :
+                <div className="empty__book">
+                    <Empty message={`Cant find book's data with id ${this.props.match.params.id}`}/>
                 </div>
-            </div>
         )
     }
 }
