@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { popModalToogle, hidePopModal } from '../Modal';
 import { BorderColorIcon, DeleteIcon } from '../Icons';
-import { deleteBook, deleteAuthor, deleteGenre } from '../../../Utils/Api/index';
+import { addAuthor, addGenre, updateAuthor, updateGenre, deleteBook, deleteAuthor, deleteGenre } from '../../../Utils/Api/index';
 
 class Table extends Component {
     showModal = (type, data) => {
+        window.scrollTo(0, 0);
         let el = '';
         if (type === 'book') {
-            el = <form id="modal_add_book" onSubmit={data ? (e) => this.handleUpdate(e, type) : (e) => this.handleAdd(e, type)}>
+            el = <form id="modal__book" onSubmit={data ? (e) => this.handleUpdate(e, type) : (e) => this.handleAdd(e, type)}>
                 <label>Title</label>
-                <input type="text" required defaultValue={data ? data.title : ''} />
+                <input type="text" name="title" required defaultValue={data ? data.title : ''} />
                 <label>Description</label>
-                <textarea rows="4" required defaultValue={data ? data.description : ''}></textarea>
+                <textarea rows="4" name="description" required defaultValue={data ? data.description : ''}></textarea>
                 <label>Author</label>
-                <select name="cars" id="cars">
+                <select id="cars" name="author">
                     {this.props.author ?
                         this.props.author.map(data => {
                             return <option value={data.id} key={data.id}>{data.name}</option>
@@ -23,7 +24,7 @@ class Table extends Component {
                     }
                 </select>
                 <label>Genre</label>
-                <select name="cars" id="cars">
+                <select id="cars" name="genre">
                     {this.props.genre ?
                         this.props.genre.map(data => {
                             return <option value={data.id} key={data.id}>{data.name}</option>
@@ -33,21 +34,21 @@ class Table extends Component {
                     }
                 </select>
                 <label>Release Date</label>
-                <input type="text" required defaultValue={data ? data.release_date : ''} />
+                <input type="text" name="release_date" required defaultValue={data ? data.release_date : ''} />
                 <label>Rating</label>
-                <input type="number" required defaultValue={data ? data.rating : ''} />
+                <input type="number" name="rating" required defaultValue={data ? data.rating : ''} />
                 <label>Image</label>
-                <input type="file" required/>
+                <input type="file" name="image" required/>
                 <button className="bt fw__medium ft__cp">Add Book</button>
             </form>
         } else if (type === 'author') {
-            el = <form id="modal_add_book" onSubmit={data ? this.handleUpdate(type) : this.handleAdd(type)}>
+            el = <form id="modal__author" onSubmit={data ? (e) => this.handleUpdate(e, type, data.id) : (e) => this.handleAdd(e, type)}>
                 <label>Title</label>
                 <input type="text" required defaultValue={data ? data.name : ''} />
                 <button className="bt fw__medium ft__cp">Add Author</button>
             </form>
         } else if (type === 'genre') {
-            el = <form id="modal_add_book">
+            el = <form id="modal__genre" onSubmit={data ? (e) => this.handleUpdate(e, type, data.id) : (e) => this.handleAdd(e, type)}>
                 <label>Title</label>
                 <input type="text" required defaultValue={data ? data.name : ''} />
                 <button className="bt fw__medium ft__cp">Add Genre</button>
@@ -83,12 +84,34 @@ class Table extends Component {
 
     handleAdd = (e, type) => {
         e.preventDefault();
-        console.log(type);
+        if (type === 'book') {
+            document.querySelectorAll('#modal__book input').forEach(el => {
+                console.log(el)
+            })
+        } else if (type === 'author') {
+            const name = e.target.querySelector('input').value;
+            addAuthor(name).then(window.location.reload());
+        }
+        else if (type === 'genre') {
+            const name = e.target.querySelector('input').value;
+            addGenre(name).then(window.location.reload());
+        }
     }
 
-    handleUpdate = (e, type) => {
+    handleUpdate = (e, type, id) => {
         e.preventDefault();
-        console.log(type);
+        if (type === 'book') {
+            document.querySelectorAll('#modal__book input').forEach(el => {
+                console.log(el)
+            })
+        } else if (type === 'author') {
+            const name = e.target.querySelector('input').value;
+            updateAuthor(name, id).then(window.location.reload());
+        }
+        else if (type === 'genre') {
+            const name = e.target.querySelector('input').value;
+            updateGenre(name, id).then(window.location.reload());
+        }
     }
 
     render() {

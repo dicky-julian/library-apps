@@ -39,7 +39,7 @@ const getAuthorById = async (id) => {
     return res;
 }
 
-const addAuthor = async (title) => {
+const addAuthor = async (name) => {
     const options = {
         'method': 'post',
         'url': `${services.GET_AUTHOR}`,
@@ -47,7 +47,29 @@ const addAuthor = async (title) => {
             "Authorization": configs.AUTHORIZATION
         },
         'data': {
-            'title': title,
+            'name': name,
+        }
+    }
+
+    const res = await api(options)
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            return err.response
+        })
+    return res;
+}
+
+const updateAuthor = async (name, id) => {
+    const options = {
+        'method': 'put',
+        'url': `${services.GET_AUTHOR}/${id}`,
+        'headers': {
+            "Authorization": configs.AUTHORIZATION
+        },
+        'data': {
+            'name': name,
         }
     }
 
@@ -86,5 +108,6 @@ export {
     getAuthor,
     getAuthorById,
     addAuthor,
-    deleteAuthor
+    deleteAuthor,
+    updateAuthor
 }

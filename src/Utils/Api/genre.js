@@ -33,7 +33,7 @@ const getGenreById = async (id) => {
     return res;
 }
 
-const addGenre = async (title) => {
+const addGenre = async (name) => {
     const options = {
         'method': 'post',
         'url': `${services.GET_GENRE}`,
@@ -41,7 +41,29 @@ const addGenre = async (title) => {
             "Authorization": configs.AUTHORIZATION
         },
         'data': {
-            'title': title,
+            'name': name,
+        }
+    }
+
+    const res = await api(options)
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            return err.response
+        })
+    return res;
+}
+
+const updateGenre = async (name, id) => {
+    const options = {
+        'method': 'put',
+        'url': `${services.GET_GENRE}/${id}`,
+        'headers': {
+            "Authorization": configs.AUTHORIZATION
+        },
+        'data': {
+            'name': name,
         }
     }
 
@@ -80,5 +102,6 @@ export {
     getGenre,
     getGenreById,
     addGenre,
-    deleteGenre
+    deleteGenre,
+    updateGenre
 }
