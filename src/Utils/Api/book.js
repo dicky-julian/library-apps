@@ -45,7 +45,29 @@ const getBookById = async (id) => {
     return res;
 }
 
+const deleteBook = async (id) => {
+    const options = {
+        'method': 'delete',
+        'url': `${services.GET_BOOK}/${id}`,
+        'headers': {
+            "Authorization": configs.AUTHORIZATION
+        }
+    }
+
+    const res = await api(options)
+        .then(res => {
+            console.log(res.data)
+            return res.data
+        })
+        .catch(err => {
+            console.log(err.response)
+            return err.response
+        })
+    return res;
+}
+
 export {
     getBook,
-    getBookById
+    getBookById,
+    deleteBook
 }

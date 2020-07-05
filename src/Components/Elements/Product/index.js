@@ -7,8 +7,12 @@ class ProductList extends Component {
         return (
             <div className="product">
                 <img src={`http://localhost:3000/images/${data.image}`} alt="" />
-                <Link to={`/book/${data.id}`} className="fw__medium">{data.title}</Link>
-                <p>{data.description.substring(0, 90)} ...</p>
+                <Link to={data.id_book ? `/book/${data.id_book}` : `/book/${data.id}`} className="fw__medium">{data.title}</Link>
+                {data.description ?
+                    <p>{data.description.substring(0, 90)} ...</p>
+                    :
+                    <></>
+                }
             </div>
         )
     }

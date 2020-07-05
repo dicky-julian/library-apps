@@ -4,14 +4,12 @@ import { getBook, getAuthor, getGenre, useToken } from '../../Utils/Api/index';
 
 // assets
 import bg from '../../Assets/images/database';
-import data from '../../dummy.json';
 import './database.scss';
 
 class Database extends Component {
     constructor() {
         super();
         this.state = {
-            data: data,
             dataUser: '',
             dataBook: '',
             dataAuthor: '',
@@ -76,10 +74,6 @@ class Database extends Component {
                 <div className="database__header">
                     <h4 className="leelawade">Welcome back, {this.state.dataUser.fullname}!</h4>
                     <div>
-                        {/* <a href="#database__content" className="bg__setup" style={{ backgroundImage: `url(${bg.bg_purple})`}} onClick={(() => this.changeContent("user"))}>
-                            <h5 className="fw__medium">Users</h5>
-                            <h6 className="fw__thin">Control user's datas</h6>
-                        </a> */}
                         <a href="#database__content" className="bg__setup" style={{ backgroundImage: `url(${bg.bg_blue})`}} onClick={(() => this.changeContent("book"))}>
                             <h5 className="fw__medium">Book</h5>
                             <h6 className="fw__thin">Control book's datas</h6>
@@ -94,7 +88,7 @@ class Database extends Component {
                         </a>
                     </div>
                 </div>
-                {data ? <Table data={data} type={this.state.contentType} /> : <div>Kosong</div>}
+                {data ? <Table data={data} type={this.state.contentType} author={this.state.dataAuthor} genre={this.state.dataGenre} /> : <div>Kosong</div>}
             </div>
         )
     }

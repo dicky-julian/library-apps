@@ -66,6 +66,10 @@ hr {
     border-bottom: 1px solid #dbdbde;
 }
 
+select {
+    cursor: pointer;
+}
+
 // general class
 .bg__setup {
     background-size: cover !important;

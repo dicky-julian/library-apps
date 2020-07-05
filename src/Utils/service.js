@@ -5,7 +5,8 @@ const services = {
     FETCH_REGISTER: `${baseUrl}/register`,
     GET_AUTHOR: `${baseUrl}/author`,
     GET_BOOK: `${baseUrl}/book`,
-    GET_GENRE: `${baseUrl}/genre`
+    GET_GENRE: `${baseUrl}/genre`,
+    GET_TRANSACTION: `${baseUrl}/transaction`,
 }
 
 const configs = {

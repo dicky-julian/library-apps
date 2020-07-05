@@ -17,17 +17,7 @@ const fetchLogin = async (uname, pass) => {
             return data;
         })
         .catch(err => {
-            const errMsg = err.response.data.message;
-            switch (errMsg) {
-                case 'InvalidUsername':
-
-                    break;
-                case 'InvalidAuth':
-
-                    break;
-                default:
-                    break;
-            }
+            return err.response;
         });
     if (res) return res;
 }
@@ -51,7 +41,6 @@ const fetchRegister = async (fullname, uname, pass) => {
         .catch(err => {
             return err.response;
         })
-        console.log(res);
     return res;
 }
 

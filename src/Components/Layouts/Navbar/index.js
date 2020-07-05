@@ -97,7 +97,7 @@ class Navbar extends Component {
                                 <h6>{isLogin.fullname}</h6>
                                 <p>{isLogin.role}</p>
                             </div>
-                            <div onClick={() => {revokeToken(); window.location.reload()}}>
+                            <div onClick={() => {revokeToken(); window.location.href ="/"}}>
                                 <ExitToAppIcon /> Logout
                             </div>
                         </Modal>

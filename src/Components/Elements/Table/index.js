@@ -1,59 +1,94 @@
 import React, { Component } from 'react';
-import { popModalToogle } from '../Modal';
+import { popModalToogle, hidePopModal } from '../Modal';
 import { BorderColorIcon, DeleteIcon } from '../Icons';
+import { deleteBook, deleteAuthor, deleteGenre } from '../../../Utils/Api/index';
 
 class Table extends Component {
     showModal = (type, data) => {
         let el = '';
         if (type === 'book') {
-            el = <form id="modal_add_book" onSubmit={data ? this.addBook : this.updateBook}>
+            el = <form id="modal_add_book" onSubmit={data ? (e) => this.handleUpdate(e, type) : (e) => this.handleAdd(e, type)}>
                 <label>Title</label>
-                <input type="text" required defaultValue={data ? data.title : ''}/>
+                <input type="text" required defaultValue={data ? data.title : ''} />
                 <label>Description</label>
                 <textarea rows="4" required defaultValue={data ? data.description : ''}></textarea>
+                <label>Author</label>
+                <select name="cars" id="cars">
+                    {this.props.author ?
+                        this.props.author.map(data => {
+                            return <option value={data.id} key={data.id}>{data.name}</option>
+                        })
+                        :
+                        <></>
+                    }
+                </select>
+                <label>Genre</label>
+                <select name="cars" id="cars">
+                    {this.props.genre ?
+                        this.props.genre.map(data => {
+                            return <option value={data.id} key={data.id}>{data.name}</option>
+                        })
+                        :
+                        <></>
+                    }
+                </select>
                 <label>Release Date</label>
-                <input type="text" required defaultValue={data ? data.release_date : ''}/>
+                <input type="text" required defaultValue={data ? data.release_date : ''} />
                 <label>Rating</label>
-                <input type="number" required defaultValue={data ? data.rating : ''}/>
+                <input type="number" required defaultValue={data ? data.rating : ''} />
+                <label>Image</label>
+                <input type="file" required/>
                 <button className="bt fw__medium ft__cp">Add Book</button>
             </form>
         } else if (type === 'author') {
-            el = <form id="modal_add_book">
+            el = <form id="modal_add_book" onSubmit={data ? this.handleUpdate(type) : this.handleAdd(type)}>
                 <label>Title</label>
-                <input type="text" required defaultValue={data ? data.name : ''}/>
+                <input type="text" required defaultValue={data ? data.name : ''} />
                 <button className="bt fw__medium ft__cp">Add Author</button>
             </form>
         } else if (type === 'genre') {
             el = <form id="modal_add_book">
                 <label>Title</label>
-                <input type="text" required defaultValue={data ? data.name : ''}/>
+                <input type="text" required defaultValue={data ? data.name : ''} />
                 <button className="bt fw__medium ft__cp">Add Genre</button>
             </form>
         } else if (type === 'delete') {
-            if (data === "book") {
-
-            } else if (data === "author") {
-
-            } else if (data === "genre") {
-
-            }
             el = <>
-            <h5>Are you sure to delete it?</h5>
-            <div>
-                <button className="bt fw__medium ft__cp">Delete</button>
-                <button className="bt fw__medium ft__cp default">Cancel</button>
-            </div>
+                <h5>Are you sure to delete it?</h5>
+                <div>
+                    <button className="bt fw__medium ft__cp" onClick={() => this.handleDelete(data.type, data.id)}>Delete</button>
+                    <button className="bt fw__medium ft__cp default" onClick={() => hidePopModal()}>Cancel</button>
+                </div>
             </>
         }
         popModalToogle(el);
     }
 
-    addBook = () => {
-
+    handleDelete = (type, id) => {
+        if (type === 'book') {
+            deleteBook(id).then(
+                window.location.reload()
+            )
+        } else if (type === 'author') {
+            deleteAuthor(id).then(
+                window.location.reload()
+            )
+        }
+        else if (type === 'genre') {
+            deleteGenre(id).then(
+                window.location.reload()
+            )
+        }
     }
 
-    updateBook = () => {
+    handleAdd = (e, type) => {
+        e.preventDefault();
+        console.log(type);
+    }
 
+    handleUpdate = (e, type) => {
+        e.preventDefault();
+        console.log(type);
     }
 
     render() {
@@ -93,9 +128,9 @@ class Table extends Component {
                                     <td className="tools">
                                         <div>
                                             <div onClick={() => this.showModal(type, data)}><BorderColorIcon /></div>
-                                            <div onClick={() => this.showModal("delete", type)}><DeleteIcon /></div>
+                                            <div onClick={() => this.showModal("delete", { type: type, id: data.id })}><DeleteIcon /></div>
                                             {type === "book" ?
-                                                data.status === 2 ?
+                                                data.status === 1 ?
                                                     <div className="able">Available</div>
                                                     :
                                                     <div className="disable">Unavailable</div>

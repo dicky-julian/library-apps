@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Empty from '../Empty';
 import Product from '../../Components/Elements/Product';
-import { getBook, getBookById, getAuthorById, getGenreById } from '../../Utils/Api/index';
+import { popModalToogle } from '../../Components/Elements/Modal';
+import { getBook, getBookById, getAuthorById, getGenreById, borrow, useToken } from '../../Utils/Api/index';
 
 // assets
 import './book.scss';
@@ -21,7 +22,6 @@ class Book extends Component {
         const id = this.props.match.params.id;
         this.fetchBook(id);
         this.fetchFavoriteBook('rating', 'DESC', 4);
-
         window.scrollTo(0, 0);
     }
 
@@ -31,6 +31,26 @@ class Book extends Component {
         if (this.props.location.pathname !== prevProps.location.pathname) {
             window.location.reload();
         }
+    }
+
+    showModal = (msg) => {
+        let el = <>
+            <h4 className="txt__center">{msg}</h4>
+            <button className="bt fw__medium ft__cp" style={{margin: '0 auto', display: 'flex'}} onClick={() => window.location.reload()}>OK</button>
+        </>
+        popModalToogle(el);
+    }
+
+    fetchBorrow = () => {
+        const userData = useToken();
+        const id_user = userData.id;
+        const id_book = this.state.dataBook.id;
+
+        borrow(id_user, id_book)
+            .then(res => {
+                if (res.data) this.showModal("Successfully borrowed");
+            })
+            .catch(err => console.log(err))
     }
 
     fetchBook = (id) => {
@@ -113,8 +133,8 @@ class Book extends Component {
                                         <h6>Borrowed</h6>
                                     </div>
                                 </div>
-                                {data.status === 2 ?
-                                    <button className="bt fw__medium">borrow</button>
+                                {data.status === 1 ?
+                                    <button className="bt fw__medium" onClick={() => this.fetchBorrow()}>borrow</button>
                                     :
                                     <button className="bt fw__medium c__disable" disabled>Out of Stock</button>
                                 }

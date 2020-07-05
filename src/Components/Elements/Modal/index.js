@@ -18,17 +18,6 @@ export const popModalToogle = (el) => {
     }
 }
 
-export const hidePopModal = () => {
-    const popModal = document.querySelector('#pop_modal');
-    const container = document.querySelector('#pop_modal .modal__container');
-    popModal.classList.remove("show");
-    popModal.classList.add("hide");
-    setTimeout(() => {
-        popModal.style.display = "none";
-        ReactDOM.unmountComponentAtNode(container);
-    }, 500);
-}
-
 export const modalToogle = (id) => {
     const el = document.getElementById(id);
     const status = el.classList.contains("modal__show");
@@ -66,6 +55,17 @@ const Modal = (props) => {
             {props.children}
         </div>
     )
+}
+
+export const hidePopModal = () => {
+    const popModal = document.querySelector('#pop_modal');
+    const container = document.querySelector('#pop_modal .modal__container');
+    popModal.classList.remove("show");
+    popModal.classList.add("hide");
+    setTimeout(() => {
+        popModal.style.display = "none";
+        ReactDOM.unmountComponentAtNode(container);
+    }, 500);
 }
 
 export default Modal;

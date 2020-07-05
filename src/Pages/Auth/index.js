@@ -10,9 +10,9 @@ class Auth extends Component {
         }
     }
 
-    showModal = () => {
+    showModal = (msg) => {
         let el = <>
-            <h4 className="txt__center">Successfull regsiter account, lets Login now.</h4>
+            <h4 className="txt__center">{msg}</h4>
             <button className="bt fw__medium ft__cp" style={{margin: '0 auto', display: 'flex'}} onClick={() => window.location.reload()}>OK</button>
         </>
         popModalToogle(el);
@@ -26,8 +26,13 @@ class Auth extends Component {
         
         await fetchLogin(uname, pass)
             .then(res => {
-                grantToken(res.token);
-                window.location.reload();
+                console.log(res);
+                if (res.status === 400) {
+                    this.showModal("Invalid Username or Password");
+                } else {
+                    grantToken(res.token);
+                    window.location.reload();
+                }
             })
             .catch(err => {
                 console.log(err);
@@ -44,8 +49,7 @@ class Auth extends Component {
 
         await fetchRegister(fullname, uname, pass)
             .then(res => {
-                this.showModal();
-                
+                this.showModal("Successfull regsiter account, lets Login now.");
             })
             .catch(err => {
                 console.log(err);
