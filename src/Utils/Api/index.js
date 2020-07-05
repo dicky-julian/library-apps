@@ -1,5 +1,5 @@
 import { fetchLogin, fetchRegister } from './auth';
-import { getBook, getBookById, deleteBook } from './book';
+import { getBook, getBookById, addBook, updateBook, deleteBook } from './book';
 import { getAuthor, getAuthorById, addAuthor, updateAuthor, deleteAuthor } from './author';
 import { getGenre, getGenreById, addGenre, updateGenre, deleteGenre } from './genre';
 import { getTransaction, borrow } from './transaction';
@@ -10,6 +10,8 @@ export {
     fetchRegister,
     getBook,
     getBookById,
+    addBook,
+    updateBook,
     deleteBook,
     getAuthor,
     getAuthorById,

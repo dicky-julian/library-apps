@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { popModalToogle, hidePopModal } from '../Modal';
 import { BorderColorIcon, DeleteIcon } from '../Icons';
-import { addAuthor, addGenre, updateAuthor, updateGenre, deleteBook, deleteAuthor, deleteGenre } from '../../../Utils/Api/index';
+import { addBook, addAuthor, addGenre, updateBook, updateAuthor, updateGenre, deleteBook, deleteAuthor, deleteGenre } from '../../../Utils/Api/index';
 
 class Table extends Component {
     showModal = (type, data) => {
         window.scrollTo(0, 0);
         let el = '';
         if (type === 'book') {
-            el = <form id="modal__book" onSubmit={data ? (e) => this.handleUpdate(e, type) : (e) => this.handleAdd(e, type)}>
+            el = <form id="modal__book" onSubmit={data ? (e) => this.handleUpdate(e, type, data.id) : (e) => this.handleAdd(e, type)}>
                 <label>Title</label>
                 <input type="text" name="title" required defaultValue={data ? data.title : ''} />
                 <label>Description</label>
                 <textarea rows="4" name="description" required defaultValue={data ? data.description : ''}></textarea>
                 <label>Author</label>
-                <select id="cars" name="author">
+                <select id="select__author">
                     {this.props.author ?
                         this.props.author.map(data => {
                             return <option value={data.id} key={data.id}>{data.name}</option>
@@ -24,7 +24,7 @@ class Table extends Component {
                     }
                 </select>
                 <label>Genre</label>
-                <select id="cars" name="genre">
+                <select id="select__genre">
                     {this.props.genre ?
                         this.props.genre.map(data => {
                             return <option value={data.id} key={data.id}>{data.name}</option>
@@ -36,7 +36,7 @@ class Table extends Component {
                 <label>Release Date</label>
                 <input type="text" name="release_date" required defaultValue={data ? data.release_date : ''} />
                 <label>Rating</label>
-                <input type="number" name="rating" required defaultValue={data ? data.rating : ''} />
+                <input type="number" pattern="[0-9]+([\,|\.][0-9]+)?" step="0.01" name="rating" required defaultValue={data ? data.rating : ''} />
                 <label>Image</label>
                 <input type="file" name="image" required/>
                 <button className="bt fw__medium ft__cp">Add Book</button>
@@ -85,9 +85,21 @@ class Table extends Component {
     handleAdd = (e, type) => {
         e.preventDefault();
         if (type === 'book') {
+            let data = {};
             document.querySelectorAll('#modal__book input').forEach(el => {
-                console.log(el)
-            })
+                let name = el.getAttribute('name');
+                let value = el.value;
+                data[name] = value;
+            });
+            const select__author = document.querySelector('#select__author');
+            const select__genre = document.querySelector('#select__genre');
+
+            data.description = document.querySelector('#modal__book textarea').value;
+            data.id_author = select__author.options[select__author.selectedIndex].value;
+            data.id_genre = select__genre.options[select__genre.selectedIndex].value;
+            data.image = document.querySelector('#modal__book input[type=file]').files[0];
+            console.log(data)
+            addBook(data).then(window.location.reload());
         } else if (type === 'author') {
             const name = e.target.querySelector('input').value;
             addAuthor(name).then(window.location.reload());
@@ -101,9 +113,20 @@ class Table extends Component {
     handleUpdate = (e, type, id) => {
         e.preventDefault();
         if (type === 'book') {
+            let data = {};
             document.querySelectorAll('#modal__book input').forEach(el => {
-                console.log(el)
-            })
+                let name = el.getAttribute('name');
+                let value = el.value;
+                data[name] = value;
+            });
+            const select__author = document.querySelector('#select__author');
+            const select__genre = document.querySelector('#select__genre');
+
+            data.description = document.querySelector('#modal__book textarea').value;
+            data.id_author = select__author.options[select__author.selectedIndex].value;
+            data.id_genre = select__genre.options[select__genre.selectedIndex].value;
+            data.image = document.querySelector('#modal__book input[type=file]').files[0];
+            updateBook(data, id).then(window.location.reload());
         } else if (type === 'author') {
             const name = e.target.querySelector('input').value;
             updateAuthor(name, id).then(window.location.reload());

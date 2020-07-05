@@ -45,6 +45,66 @@ const getBookById = async (id) => {
     return res;
 }
 
+const addBook = async (data) => {
+    const body = new FormData();
+    const image = data.image;
+    delete data.image;
+
+    for (var key in data) {
+        body.set(key, data[key]);
+    }
+
+    body.append('image', image);
+    const options = {
+        'method': 'post',
+        'url': `${services.GET_BOOK}`,
+        'data': body,
+        'headers': {
+            "Authorization": configs.AUTHORIZATION,
+            "Content-Type": "multipart/form-data"
+        }
+    }
+
+    const res = await api(options)
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            return err.response
+        })
+    return res;
+}
+
+const updateBook = async (data, id) => {
+    const body = new FormData();
+    const image = data.image;
+    delete data.image;
+
+    for (var key in data) {
+        body.set(key, data[key]);
+    }
+
+    body.append('image', image);
+    const options = {
+        'method': 'put',
+        'url': `${services.GET_BOOK}/${id}`,
+        'data': body,
+        'headers': {
+            "Authorization": configs.AUTHORIZATION,
+            "Content-Type": "multipart/form-data"
+        }
+    }
+
+    const res = await api(options)
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            return err.response
+        })
+    return res;
+}
+
 const deleteBook = async (id) => {
     const options = {
         'method': 'delete',
@@ -69,5 +129,7 @@ const deleteBook = async (id) => {
 export {
     getBook,
     getBookById,
+    addBook,
+    updateBook,
     deleteBook
 }
