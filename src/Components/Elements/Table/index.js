@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { popModalToogle, hidePopModal } from '../Modal';
 import { BorderColorIcon, DeleteIcon } from '../Icons';
-import { addBook, addAuthor, addGenre, updateBook, updateAuthor, updateGenre, deleteBook, deleteAuthor, deleteGenre } from '../../../Utils/Api/index';
+import { addBook, addAuthor, addGenre, updateBook, updateAuthor, updateGenre, deleteBook, deleteAuthor, deleteGenre, returnBook } from '../../../Utils/Api/index';
 
 class Table extends Component {
     showModal = (type, data) => {
@@ -62,8 +62,21 @@ class Table extends Component {
                     <button className="bt fw__medium ft__cp default" onClick={() => hidePopModal()}>Cancel</button>
                 </div>
             </>
+        } else if (type === 'setStatus') {
+            console.log(data);
+            el = <>
+                <h5>Are you sure to return this book?</h5>
+                <div>
+                    <button className="bt fw__medium ft__cp" onClick={() => this.handleReturnBook(data)}>Return</button>
+                    <button className="bt fw__medium ft__cp default" onClick={() => hidePopModal()}>Cancel</button>
+                </div>
+            </>
         }
         popModalToogle(el);
+    }
+
+    handleReturnBook = (id) => {
+        returnBook(id).then(window.location.reload())
     }
 
     handleError = (el, msg) => {
@@ -212,7 +225,7 @@ class Table extends Component {
                                                 data.status === 1 ?
                                                     <div className="able">Available</div>
                                                     :
-                                                    <div className="disable">Unavailable</div>
+                                                    <div className="disable" onClick={() => this.showModal("setStatus", data.id)}>Unavailable</div>
                                                 :
                                                 <></>
                                             }
