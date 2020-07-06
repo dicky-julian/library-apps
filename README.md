@@ -6,12 +6,12 @@ Library App is a modern web app that allows librrarian to do transaction like bo
 
 To install Library App, follow these steps:
 
-Npm:
+npm:
 ```
 npm install
 ```
 
-Yarn:
+yarn:
 ```
 yarn install
 ```
@@ -20,10 +20,7 @@ yarn install
 To use Library App, follow these steps:
 
 1. serve backend server
-2. run app on your device
-```
-npm start
-``
+2. run app on your device `npm start`
 
 ## Contact
 
