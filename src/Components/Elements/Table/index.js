@@ -9,6 +9,7 @@ class Table extends Component {
         let el = '';
         if (type === 'book') {
             el = <form id="modal__book" onSubmit={data ? (e) => this.handleUpdate(e, type, data.id) : (e) => this.handleAdd(e, type)}>
+                <div className="error_form"></div>
                 <label>Title</label>
                 <input type="text" name="title" required defaultValue={data ? data.title : ''} />
                 <label>Description</label>
@@ -65,6 +66,18 @@ class Table extends Component {
         popModalToogle(el);
     }
 
+    handleError = (el, msg) => {
+        const element = document.querySelector(`${el} .error_form`);
+
+        if (element) {
+            element.innerHTML = `
+            <div class="bt error" style="margin-bottom: 20px">${msg}</div>
+            `
+        };
+
+        window.scrollTo(0, 0);
+    }
+
     handleDelete = (type, id) => {
         if (type === 'book') {
             deleteBook(id).then(
@@ -98,7 +111,16 @@ class Table extends Component {
             data.id_author = select__author.options[select__author.selectedIndex].value;
             data.id_genre = select__genre.options[select__genre.selectedIndex].value;
             data.image = document.querySelector('#modal__book input[type=file]').files[0];
-            console.log(data)
+            const extension = data.image.type.split('/')[1];
+            if(extension !== 'jpg' && extension !== 'jpeg' && extension !== 'png') {
+                this.handleError('#modal__book', 'Image must be jpg, jpeg or png');
+                return '';
+            }
+
+            if(data.image.size > 1000000) {
+                this.handleError('#modal__book', 'Image size must be lower than 1 Mb');
+                return '';
+            }
             addBook(data).then(window.location.reload());
         } else if (type === 'author') {
             const name = e.target.querySelector('input').value;
@@ -126,6 +148,17 @@ class Table extends Component {
             data.id_author = select__author.options[select__author.selectedIndex].value;
             data.id_genre = select__genre.options[select__genre.selectedIndex].value;
             data.image = document.querySelector('#modal__book input[type=file]').files[0];
+            const extension = data.image.type.split('/')[1];
+            if(extension !== 'jpg' && extension !== 'jpeg' && extension !== 'png') {
+                this.handleError('#modal__book', 'Image must be jpg, jpeg or png');
+                return '';
+            }
+
+            if(data.image.size > 1000000) {
+                this.handleError('#modal__book', 'Image size must be lower than 1 Mb');
+                return '';
+            }
+
             updateBook(data, id).then(window.location.reload());
         } else if (type === 'author') {
             const name = e.target.querySelector('input').value;
