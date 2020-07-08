@@ -10,8 +10,9 @@ const services = {
 }
 
 const configs = {
-    AUTHORIZATION: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInJvbGUiOiJhZG1pbiIsImlhdCI6MTU5MzUzNDUwMCwiZXhwIjoxNTk0MTM5MzAwfQ.EXyS28orCfhoI9mjOcwfmhJ_Otq855E_4RnpKV7Q-Qk'
+    AUTHORIZATION: localStorage.getItem("libsToken") || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsInVzZXJuYW1lIjoibmFiaWxhIiwiZnVsbG5hbWUiOiJOYWJpbGEgUmFobWFkYW50aSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTU5NDEyMjIzMX0.gYou-6jDKrVvXd7P2Ml3mgbf_T5NC5K885yCfqlUKS8'
 }
+
 export {
     services,
     configs

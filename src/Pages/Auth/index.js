@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { popModalToogle } from '../../Components/Elements/Modal';
 import { fetchLogin, fetchRegister, grantToken } from '../../Utils/Api/index';
+import { setToken } from '../../Redux/Actions/auth';
 
 class Auth extends Component {
     constructor() {
@@ -26,16 +28,14 @@ class Auth extends Component {
         
         await fetchLogin(uname, pass)
             .then(res => {
-                console.log(res);
-                if (res.status === 400) {
-                    this.showModal("Invalid Username or Password");
-                } else {
+                if (res) {
+                    console.log(res.token);
+                    this.props.setToken(res.token);
                     grantToken(res.token);
-                    window.location.reload();
+                    this.showModal("Success Login");
+                } else {
+                    this.showModal("Invalid Username or Password");
                 }
-            })
-            .catch(err => {
-                console.log(err);
             })
     }
 
@@ -48,7 +48,7 @@ class Auth extends Component {
         if (!fullname || !uname || !pass) return("error")
 
         await fetchRegister(fullname, uname, pass)
-            .then(res => {
+            .then(() => {
                 this.showModal("Successfull regsiter account, lets Login now.");
             })
             .catch(err => {
@@ -86,4 +86,10 @@ class Auth extends Component {
     }
 }
 
-export default Auth;
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+const mapDispathToProps = { setToken };
+
+export default connect(mapStateToProps, mapDispathToProps)(Auth);

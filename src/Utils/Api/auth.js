@@ -13,13 +13,12 @@ const fetchLogin = async (uname, pass) => {
 
     const res = await api(options)
         .then(res => {
-            const data = res.data.data;
-            return data;
+            return res.data.data;
         })
-        .catch(err => {
-            return err.response;
+        .catch(() => {
+            return false
         });
-    if (res) return res;
+    return res;
 }
 
 const fetchRegister = async (fullname, uname, pass) => {

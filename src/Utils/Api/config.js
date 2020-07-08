@@ -1,13 +1,16 @@
 import jwtDecode from 'jwt-decode';
 
+// set token
 const grantToken = token => {
     localStorage.setItem("libsToken", token);
 }
 
+// remove token
 const revokeToken = () => {
     localStorage.removeItem("libsToken");
 }
 
+// get user data from token
 const useToken = () => {
     const token = localStorage.getItem("libsToken");
         if (token) {
@@ -19,6 +22,7 @@ const useToken = () => {
         return '';
 }
 
+// sort data
 const compareValues = (key, order = 'asc') => {
     return function innerSort(a, b) {
         if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {

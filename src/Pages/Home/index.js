@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Link }  from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Empty from '../Empty';
 import Product from '../../Components/Elements/Product';
 import Modal, { modalToogle } from '../../Components/Elements/Modal';
-import { getBook, getGenre, compareValues } from '../../Utils/Api/index';
+import { compareValues } from '../../Utils/Api/index';
+import { fetchBook, fetchBookFilter } from '../../Redux/Actions/book';
 
 // icons
 import SearchIcon from '@material-ui/icons/Search';
@@ -15,41 +17,9 @@ class Home extends Component {
     constructor() {
         super();
         this.state = {
-            dataBook: '',
-            dataBookGenre: '',
-            dataBookFavorite: '',
-            dataGenre: '',
+            dataStatus: 'all',
+            dataBookSort: ''
         }
-    }
-
-    fetchBook = () => {
-        getBook()
-            .then(res => {
-                this.setState({ dataBook: res.data });
-            })
-            .catch(err => {
-                console.log(err.response);
-            })
-    }
-
-    fetchFavoriteBook = (order, orderType, limit) => {
-        getBook(null, order, orderType, limit)
-            .then(res => {
-                this.setState({ dataBookFavorite: res.data })
-            })
-            .catch(err => {
-                console.log(err.response)
-            })
-    }
-
-    fetchGenre = () => {
-        getGenre()
-            .then(res => {
-                this.setState({ dataGenre: res.data })
-            })
-            .catch(err => {
-                console.log(err.response)
-            })
     }
 
     handleSearch = (e) => {
@@ -59,55 +29,35 @@ class Home extends Component {
         if (search) this.props.history.push(`/book?search=${search}`);
     }
 
-    handleGenreList = () => {
-        const els = document.querySelectorAll(".genre__list > div");
-        const activeEls = document.querySelector(".genre__list > .active");
-        const data = this.state.dataBook;
-        if (els.length > 1) {
-            els.forEach((el) => {
-                el.addEventListener("click", ((e) => {
-                    const id = e.target.dataset.id;
-                    if (activeEls) {
-                        activeEls.classList.remove("active");
-                        e.target.classList.add("active");
-                    }
-                    if (id && data) {
-                        const newData = data.filter(el => el.id_genre === parseInt(id));
-                        this.setState({dataBookGenre: newData});
-                    }
-                     else {
-                        this.setState({dataBookGenre: ''});
-                    }
-                }))
-            })
-        }
+    handleGenreBook = (e, status) => {
+        this.setState({ dataStatus: status});
+        document.querySelector('#genre__list .active').classList.remove('active');
+        e.target.classList.add('active');
     }
 
     sortTools = (e, key) => {
-        const activeEl = document.querySelector("#sort__tools>.active");
+        let data = this.props.book.book[this.state.dataStatus];
+        let newData = '';
+        let activeEl = document.querySelector("#sort__tools>.active");
         if (activeEl) activeEl.classList.remove("active");
         e.target.classList.add("active");
-        modalToogle("sort__tools");
-        let data = this.state.dataBook;
-        let newData = '';
         if (data) {
-            newData = this.state.dataBook.sort(compareValues(key, 'desc'));
+            newData = data.sort(compareValues(key, 'desc'));
         }
-        this.setState({dataBookGenre: newData});
+        this.setState({dataBookSort: newData});
+        modalToogle("sort__tools");
     }
 
     componentDidMount() {
-        this.fetchGenre();
-        this.fetchBook();
-        this.fetchFavoriteBook('rating', 'DESC', 3);
-    }
-
-    componentDidUpdate() {
-        this.handleGenreList();
+        if (!this.props.book.book) this.props.fetchBook();
+        if (!this.props.book.bookFilter) this.props.fetchBookFilter([null, 'rating', 'DESC', 3]);
     }
 
     render() {
-        const ListBook = this.state.dataBookGenre || this.state.dataBook;
+        const dataBook = this.props.book.book;
+        const dataBookSort = this.state.dataBookSort;
+        const dataGenre = this.props.book.genre;
+        const favoriteBook = this.props.book.bookFilter;
         return (
             <>
                 {/* HEADER */}
@@ -125,8 +75,8 @@ class Home extends Component {
                         <h4>Top of the last week</h4>
                         <p>The most desired books of the last week</p>
                     </div>
-                    {this.state.dataBookFavorite ?
-                        this.state.dataBookFavorite.map((data, index) => {
+                    {favoriteBook ?
+                        favoriteBook.map((data, index) => {
                             return (
                                 <div className="product" key={index}>
                                     <img src={`http://localhost:3000/images/${data.image}`} alt="" />
@@ -137,26 +87,21 @@ class Home extends Component {
                                     </div>
                                 </div>
                             )
-                        })
-                        :
-                        <></>
+                        }) : <></>
                     }
                 </div>
 
                 <div className="home__body">
-                    {/* GENRE of BOOK */}
                     <div className="product__tools">
-                        <div className="bt bt__default c__pointer" onClick={() => modalToogle("sort__tools")}>
-                            Sorts
-                        </div>
+                        <div className="bt bt__default c__pointer" onClick={() => modalToogle("sort__tools")}>Sorts</div>
+
+                        {/* GENRE LIST */}
                         <div id="genre__list" className="genre__list">
-                            <div className="active">All</div>
-                            {this.state.dataGenre ?
-                                this.state.dataGenre.map((data, index) => {
-                                    return (<div key={index} data-id={data.id}>{data.name}</div>)
-                                })
-                                :
-                                <></>
+                            <div className="active" onClick={(e) => this.handleGenreBook(e, 'all')}>All</div>
+                            {dataGenre ?
+                                dataGenre.map((data, index) => {
+                                    return (<div key={index} onClick={(e) => this.handleGenreBook(e, data.id)}>{data.name}</div>)
+                                }) : <></>
                             }
                         </div>
                         <div className="bt bt__default c__pointer" onClick={() => modalToogle("filter__tools")}>Filters</div>
@@ -176,17 +121,18 @@ class Home extends Component {
 
                     {/* LIST of ALL BOOK */}
                     <div className="product__list">
-                    {
-                        ListBook ?
-                        ListBook.length ?
-                        ListBook.map((data, index) => {
-                            return <Product data={data} key={index} />
-                        })
-                        :
-                        <Empty message="Cant find data" />
-                        :
-                        <Empty message="Cant find data" />
-                    }
+                        {
+                            dataBookSort ?
+                            dataBookSort.map((data, index) => {
+                                return <Product data={data} key={index} />
+                            })
+                            :
+                            dataBook ?
+                                dataBook[this.state.dataStatus].length ?
+                                dataBook[this.state.dataStatus].map((data, index) => {
+                                    return <Product data={data} key={index} />
+                                }) : <Empty message="Cant find data" /> : <Empty message="Cant find data" />
+                        }
                     </div>
                 </div>
             </>
@@ -194,4 +140,10 @@ class Home extends Component {
     }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+    book: state.book
+});
+
+const mapDispathToProps = { fetchBook, fetchBookFilter };
+
+export default connect(mapStateToProps, mapDispathToProps)(Home);
