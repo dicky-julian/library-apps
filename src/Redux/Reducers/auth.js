@@ -1,25 +1,21 @@
 const initialState = {
     isLogin: false,
     isAdmin: false,
-    token: '',
+    isLogout: false,
 }
 
 const auth = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_TOKEN':
+        case 'SET_USER':
             return {
-                ...state,
-                token: action.payload
+                isLogin: action.payload.isLogin,
+                isAdmin: action.payload.isAdmin
             }
-        case 'SET_LOGIN':
+        case 'REVOKE_USER':
             return {
-                ...state,
-                isLogin: action.payload
-            }
-        case 'SET_ADMIN':
-            return {
-                ...state,
-                isAdmin: action.payload
+                isLogin: false,
+                isAdmin: false,
+                isLogout: action.payload
             }
         default:
             return state

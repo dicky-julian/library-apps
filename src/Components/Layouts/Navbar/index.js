@@ -7,20 +7,21 @@ import Auth from '../../../Pages/Auth';
 import Modal, { PopModal, modalToogle } from '../../Elements/Modal';
 import { ExitToAppIcon, MenuIcon } from '../../Elements/Icons';
 // Utility
-import { revokeToken } from '../../../Utils/Api/index';
 import { toogleNav, toogleClickNav, setActiveNav } from './action';
-import { setAdmin, setLogin } from '../../../Redux/Actions/auth';
+import { setToken, revokeToken } from '../../../Redux/Actions/auth';
 
 class Navbar extends Component {
     componentDidMount() {
+        if (this.props.auth.isLogout) this.props.revokeToken(false);
         const location = this.props.location.pathname;
-        this.props.setAdmin();
-        this.props.setLogin();
-
         toogleClickNav(location);
         setActiveNav(location);
 
         document.querySelector("#loading").remove();
+    }
+
+    componentDidUpdate() {
+        if (this.props.auth.isLogout) window.location.href = '/';
     }
 
     render() {
@@ -57,7 +58,7 @@ class Navbar extends Component {
                                 <h6>{isLogin.fullname}</h6>
                                 <p>{isLogin.role}</p>
                             </div>
-                            <div onClick={() => { revokeToken(); window.location.href = "/" }}><ExitToAppIcon /> Logout</div>
+                            <div onClick={() => { this.props.revokeToken(true) }}><ExitToAppIcon /> Logout</div>
                         </Modal>
                         <div id="toogle_nav" onClick={() => toogleNav()} ><MenuIcon /></div>
                     </div>
@@ -76,6 +77,6 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-const mapDispathToProps = { setAdmin, setLogin };
+const mapDispathToProps = { setToken, revokeToken };
 
 export default withRouter(connect(mapStateToProps, mapDispathToProps)(Navbar))

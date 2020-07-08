@@ -9,12 +9,12 @@
 
 .modal__show {
     opacity: 1;
-    transition: visibility 0s, opacity .5s linear;
+    transition: visibility 0s, opacity .05s linear;
 }
 
 .modal__hide {
     opacity: 0;
-    transition: visibility 0s, opacity .25s linear;
+    transition: visibility 0s, opacity .05s linear;
 }
 
 #pop_modal {

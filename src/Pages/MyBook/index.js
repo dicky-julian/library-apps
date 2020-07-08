@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Empty from '../Empty';
 import Product from '../../Components/Elements/Product';
-import { useToken, getTransaction } from '../../Utils/Api/index';
+import { fetchUserBook } from '../../Redux/Actions/transaction';
 
 // assets
 import './mybook.scss';
@@ -10,44 +11,25 @@ class MyBook extends Component {
     constructor() {
         super();
         this.state = {
-            bookBorrow: '',
-            bookHistory: '',
             toogleStatus: 1
         }
     }
 
     componentDidMount() {
-        const userData = useToken();
-        this.getBookBorrow(userData.id);
-        this.getBookHistory(userData.id);
-    }
-
-    getBookBorrow = (id) => {
-        getTransaction(id, 1)
-            .then(res => {
-                if (res.data) this.setState({ bookBorrow: res.data });
-            })
-            .catch(err => console.log(err))
-    }
-
-    getBookHistory = (id) => {
-        getTransaction(id, 2)
-        .then(res => {
-            if (res.data) this.setState({ bookHistory: res.data });
-        })
-        .catch(err => console.log(err))
+        const id = this.props.auth.isLogin.id;
+        this.props.fetchUserBook(id);
     }
 
     handleToogleStatus = (e, status) => {
         document.querySelector('.genre__list .active').classList.remove('active');
         e.target.classList.add('active');
-        this.setState({toogleStatus: status});
+        this.setState({ toogleStatus: status });
     }
 
     render() {
         const status = this.state.toogleStatus;
-        const dataBorrow = this.state.bookBorrow;
-        const dataHistory = this.state.bookHistory;
+        const dataBorrow = this.props.transaction.bookBorrow;
+        const dataHistory = this.props.transaction.bookHistory;
         return (
             <div className="my_book">
                 <div className="product__tools">
@@ -58,25 +40,32 @@ class MyBook extends Component {
                 </div>
                 {/* LIST of ALL BOOK */}
                 <div className="product__list">
-                    { status ? 
-                    dataBorrow.length ?
-                        dataBorrow.map((data, index) => {
-                            return <Product data={data} key={index} />
-                        })
+                    {status ?
+                        dataBorrow.length ?
+                            dataBorrow.map((data, index) => {
+                                return <Product data={data} key={index} />
+                            })
+                            :
+                            <Empty message="Cant find data" />
                         :
-                        <Empty message="Cant find data" />
-                    :
-                    dataHistory.length ?
-                        dataHistory.map((data, index) => {
-                            return <Product data={data} key={index} />
-                        })
-                        :
-                        <Empty message="Cant find data" />
+                        dataHistory.length ?
+                            dataHistory.map((data, index) => {
+                                return <Product data={data} key={index} />
+                            })
+                            :
+                            <Empty message="Cant find data" />
                     }
-                    </div>
+                </div>
             </div>
         )
     }
 }
 
-export default MyBook;
+const mapStateToProps = state => ({
+    auth: state.auth,
+    transaction: state.transaction
+});
+
+const mapDispathToProps = { fetchUserBook };
+
+export default connect(mapStateToProps, mapDispathToProps)(MyBook);

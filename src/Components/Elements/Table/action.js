@@ -62,7 +62,7 @@ const showModal = (type, datas) => {
         el = <>
             <h5>Are you sure to return this book?</h5>
             <div>
-                <button className="bt fw__medium ft__cp" onClick={() => handleReturnBook(data)}>Return</button>
+                <button className="bt fw__medium ft__cp" onClick={() => handleReturnBook(datas)}>Return</button>
                 <button className="bt fw__medium ft__cp default" onClick={() => hidePopModal()}>Cancel</button>
             </div>
         </>

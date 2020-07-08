@@ -1,29 +1,25 @@
-import { useToken } from '../../Utils/Api'
+import { decodeToken } from '../../Utils/Api';
 
-let data = useToken();
+export const setToken = token => dispatch => {
+    const data = decodeToken(token);
+    return dispatch(setUser(data));
+}
 
-export const setLogin = () => {
-    if (!data) data = false;
+export const revokeToken = (val) => {
     return {
-        type: 'SET_LOGIN',
-        payload: data
+        type: 'REVOKE_USER',
+        payload: val
     }
 }
 
-export const setAdmin = () => {
+export const setUser = (data) => {
     let role = false;
     if (data.role === 'admin') role = true
-    
     return {
-        type: 'SET_ADMIN',
-        payload: role
-    }
-}
-
-
-export const setToken = token => {
-    return {
-        type: 'SET_TOKEN',
-        payload: token
+        type: 'SET_USER',
+        payload: {
+            isLogin: data,
+            isAdmin: role
+        }
     }
 }

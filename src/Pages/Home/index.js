@@ -50,7 +50,7 @@ class Home extends Component {
 
     componentDidMount() {
         if (!this.props.book.book) this.props.fetchBook();
-        if (!this.props.book.bookFilter) this.props.fetchBookFilter([null, 'rating', 'DESC', 3]);
+        this.props.fetchBookFilter([null, 'rating', 'DESC', 3]);
     }
 
     render() {

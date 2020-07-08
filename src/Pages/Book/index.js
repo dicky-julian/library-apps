@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Empty from '../Empty';
 import Product from '../../Components/Elements/Product';
 import { popModalToogle } from '../../Components/Elements/Modal';
-import { borrow, useToken } from '../../Utils/Api/index';
+import { borrow } from '../../Utils/Api/index';
 import { fetchBookFilter, fetchSingleBook } from '../../Redux/Actions/book';
 
 // assets
@@ -20,8 +20,8 @@ class Book extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);
         const id = this.state.id;
-        if (!this.props.book.bookSingle) this.props.fetchSingleBook(id);
-        if (!this.props.book.bookFilter) this.props.fetchBookFilter([null, 'rating', 'DESC', 4]);
+        this.props.fetchSingleBook(id);
+        this.props.fetchBookFilter([null, 'rating', 'DESC', 4]);
     }
 
     componentDidUpdate(prevProps) {
@@ -41,9 +41,9 @@ class Book extends Component {
     }
 
     fetchBorrow = () => {
-        const userData = useToken();
+        const userData = this.props.auth.isLogin;
         const id_user = userData.id;
-        const id_book = this.state.dataBook.id;
+        const id_book = this.state.id;
 
         borrow(id_user, id_book)
             .then(res => {
@@ -52,6 +52,7 @@ class Book extends Component {
     }
 
     render() {
+        const isLogin = this.props.auth.isLogin;
         const favoriteBook = this.props.book.bookFilter;
         const data = this.props.book.bookSingle;
         const book = data.book;
@@ -94,10 +95,11 @@ class Book extends Component {
                                         <h6>Borrowed</h6>
                                     </div>
                                 </div>
-                                {book.status === 1 ?
-                                    <button className="bt fw__medium" onClick={() => this.fetchBorrow()}>borrow</button>
-                                    :
-                                    <button className="bt fw__medium c__disable" disabled>Out of Stock</button>
+                                {!isLogin ? <></> :
+                                    book.status === 1 ?
+                                        <button className="bt fw__medium" onClick={() => this.fetchBorrow()}>borrow</button>
+                                        :
+                                        <button className="bt fw__medium c__disable" disabled>Out of Stock</button>
                                 }
                             </div>
                             <div>
@@ -128,6 +130,7 @@ class Book extends Component {
 }
 
 const mapStateToProps = state => ({
+    auth: state.auth,
     book: state.book
 });
 
