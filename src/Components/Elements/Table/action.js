@@ -54,7 +54,7 @@ const showModal = (type, datas) => {
         el = <>
             <h5>Are you sure to delete it?</h5>
             <div>
-                <button className="bt fw__medium ft__cp" onClick={() => handleDelete(data.type, data.id)}>Delete</button>
+                <button className="bt fw__medium ft__cp" onClick={() => handleDelete(datas.type, datas.id)}>Delete</button>
                 <button className="bt fw__medium ft__cp default" onClick={() => hidePopModal()}>Cancel</button>
             </div>
         </>

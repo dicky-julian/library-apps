@@ -1,30 +1,8 @@
 import jwtDecode from 'jwt-decode';
 
-// set token
-const grantToken = token => {
-  localStorage.setItem("libsToken", token);
-}
-
-// remove token
-const revokeToken = () => {
-  localStorage.removeItem("libsToken");
-}
-
 const decodeToken = token => {
   const tokenData = jwtDecode(token);
   return tokenData;
-}
-
-// get user data from token
-const useToken = () => {
-  const token = localStorage.getItem("libsToken");
-  if (token) {
-    const tokenData = jwtDecode(token);
-    return tokenData;
-  } else {
-    console.log("can't find token");
-  }
-  return '';
 }
 
 // sort data
@@ -53,8 +31,5 @@ const compareValues = (key, order = 'asc') => {
 
 export {
   decodeToken,
-  grantToken,
-  revokeToken,
-  useToken,
   compareValues
 }

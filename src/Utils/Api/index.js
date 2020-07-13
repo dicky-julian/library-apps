@@ -3,7 +3,7 @@ import { getBook, getBookById, addBook, updateBook, deleteBook } from './book';
 import { getAuthor, getAuthorById, addAuthor, updateAuthor, deleteAuthor } from './author';
 import { getGenre, getGenreById, addGenre, updateGenre, deleteGenre } from './genre';
 import { getTransaction, borrow, returnBook } from './transaction';
-import { decodeToken, grantToken, revokeToken, useToken, compareValues } from './config';
+import { decodeToken, compareValues } from './config';
 
 export {
     fetchLogin,
@@ -27,8 +27,5 @@ export {
     borrow,
     returnBook,
     decodeToken,
-    grantToken,
-    revokeToken,
-    useToken,
     compareValues
 }

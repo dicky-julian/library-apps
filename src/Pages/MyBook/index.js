@@ -41,17 +41,23 @@ class MyBook extends Component {
                 {/* LIST of ALL BOOK */}
                 <div className="product__list">
                     {status ?
+                        dataBorrow ?
                         dataBorrow.length ?
                             dataBorrow.map((data, index) => {
                                 return <Product data={data} key={index} />
                             })
                             :
                             <Empty message="Cant find data" />
+                            :
+                            <Empty message="Cant find data" />
                         :
+                        dataHistory ?
                         dataHistory.length ?
                             dataHistory.map((data, index) => {
                                 return <Product data={data} key={index} />
                             })
+                            :
+                            <Empty message="Cant find data" />
                             :
                             <Empty message="Cant find data" />
                     }
