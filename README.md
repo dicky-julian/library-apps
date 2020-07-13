@@ -22,6 +22,9 @@ To use Library App, follow these steps:
 1. serve backend server
 2. run app on your device `npm start`
 
-## Contact
+## Demo
 
-If you want to contact me you can reach me at julian18.ech@gmail.com.
+<p align="center"><img src="./src/Assets/images/documentation/landing_page_1.png"></p>
+<p align="center"><img src="./src/Assets/images/documentation/landing_page_2.png"></p>
+<p align="center"><img src="./src/Assets/images/documentation/single_page.png"></p>
+<p align="center"><img src="./src/Assets/images/documentation/admin_dashboard.png"></p>
