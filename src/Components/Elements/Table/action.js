@@ -163,7 +163,10 @@ const handleDelete = (type, id) => {
 }
 
 const handleReturnBook = (id) => {
-    returnBook(id).then(window.location.reload())
+    console.log(id);
+    returnBook(id).then(res => {
+        if (res) window.location.reload();
+    })
 }
 
 const handleError = (el, msg) => {

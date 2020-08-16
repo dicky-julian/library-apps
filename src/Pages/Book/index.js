@@ -5,6 +5,7 @@ import Product from '../../Components/Elements/Product';
 import { popModalToogle } from '../../Components/Elements/Modal';
 import { borrow } from '../../Utils/Api/index';
 import { fetchBookFilter, fetchSingleBook } from '../../Redux/Actions/book';
+import { baseUrl } from '../../Utils/service';
 
 // assets
 import './book.scss';
@@ -63,11 +64,11 @@ class Book extends Component {
             data ?
                 <div className="book">
                     <div className="book__header">
-                        <div className="bg__setup" style={{ backgroundImage: `url(http://localhost:3000/images/${book.image})` }}></div>
+                        <div className="bg__setup" style={{ backgroundImage: `url(${baseUrl}/images/${book.image})` }}></div>
                     </div>
                     <div className="book__detail">
                         <div>
-                            <div className="book__img bg__setup" style={{ backgroundImage: `url(http://localhost:3000/images/${book.image})` }}></div>
+                            <div className="book__img bg__setup" style={{ backgroundImage: `url(${baseUrl}/images/${book.image})` }}></div>
                             <div className="detail__list">
                                 <div>
                                     <h6 className="fw__bold">Author</h6>

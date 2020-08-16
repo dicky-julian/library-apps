@@ -50,11 +50,11 @@ class Navbar extends Component {
 
                 {isLogin ?
                     <div>
-                        <div className="profile__toogle bg__setup c__pointer" onClick={() => modalToogle("user__modal")} style={{ backgroundImage: "url('https://lastfm-img2.akamaized.net/i/u/avatar170s/644df4fa78ad0090e7ce60fa11665cfa')" }}></div>
+                        <div className="profile__toogle bg__setup c__pointer" onClick={() => modalToogle("user__modal")} style={{ backgroundImage: "url('https://pbs.twimg.com/profile_images/3133297750/c816dc4d902eb167de5f83e8e6c300f7.png')" }}></div>
                         <Modal id="user__modal">
                             <div className="arrow__helper"></div>
                             <div>
-                                <img src="https://lastfm-img2.akamaized.net/i/u/avatar170s/644df4fa78ad0090e7ce60fa11665cfa" alt="" />
+                                <img src="https://pbs.twimg.com/profile_images/3133297750/c816dc4d902eb167de5f83e8e6c300f7.png" alt="" />
                                 <h6>{isLogin.fullname}</h6>
                                 <p>{isLogin.role}</p>
                             </div>

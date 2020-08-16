@@ -6,6 +6,7 @@ import Product from '../../Components/Elements/Product';
 import Modal, { modalToogle } from '../../Components/Elements/Modal';
 import { compareValues } from '../../Utils/Api/index';
 import { fetchBook, fetchBookFilter } from '../../Redux/Actions/book';
+import { baseUrl } from '../../Utils/service';
 
 // icons
 import SearchIcon from '@material-ui/icons/Search';
@@ -30,7 +31,7 @@ class Home extends Component {
     }
 
     handleGenreBook = (e, status) => {
-        this.setState({ dataStatus: status});
+        this.setState({ dataStatus: status });
         document.querySelector('#genre__list .active').classList.remove('active');
         e.target.classList.add('active');
     }
@@ -44,7 +45,7 @@ class Home extends Component {
         if (data) {
             newData = data.sort(compareValues(key, 'desc'));
         }
-        this.setState({dataBookSort: newData});
+        this.setState({ dataBookSort: newData });
         modalToogle("sort__tools");
     }
 
@@ -79,7 +80,7 @@ class Home extends Component {
                         favoriteBook.map((data, index) => {
                             return (
                                 <div className="product" key={index}>
-                                    <img src={`http://localhost:3000/images/${data.image}`} alt="" />
+                                    <img src={`${baseUrl}/images/${data.image}`} alt="" />
                                     <div>
                                         <h5><Link to={`/book/${data.id}`}>{data.title}</Link></h5>
                                         {data.description.substring(0, 90)}
@@ -123,15 +124,15 @@ class Home extends Component {
                     <div className="product__list">
                         {
                             dataBookSort ?
-                            dataBookSort.map((data, index) => {
-                                return <Product data={data} key={index} />
-                            })
-                            :
-                            dataBook ?
-                                dataBook[this.state.dataStatus].length ?
-                                dataBook[this.state.dataStatus].map((data, index) => {
+                                dataBookSort.map((data, index) => {
                                     return <Product data={data} key={index} />
-                                }) : <Empty message="Cant find data" /> : <Empty message="Cant find data" />
+                                })
+                                :
+                                dataBook ?
+                                    dataBook[this.state.dataStatus].length ?
+                                        dataBook[this.state.dataStatus].map((data, index) => {
+                                            return <Product data={data} key={index} />
+                                        }) : <Empty message="Cant find data" /> : <Empty message="Cant find data" />
                         }
                     </div>
                 </div>

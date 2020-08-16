@@ -64,7 +64,8 @@ const returnBook = async (id_book) => {
             return res.data;
         })
         .catch(err => {
-            return err.response
+            console.log(err.response)
+            return false;
         })
     return res;
 }

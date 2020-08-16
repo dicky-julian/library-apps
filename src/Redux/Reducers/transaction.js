@@ -1,6 +1,6 @@
 const initialState = {
-    bookBorrow: '',
-    bookHistory: ''
+    bookBorrow: [],
+    bookHistory: []
 }
 
 const transaction = (state = initialState, action) => {
