@@ -35,17 +35,20 @@ To try the apps, you must follow the simple example steps below.
 
 ### Installation
 
-To install Librarian, follow these steps:
-
-npm:
+1. Clone the repo
+```sh
+git clone https://github.com/dicky-julian/library-apps.git
 ```
+2. Install NPM packages
+```sh
 npm install
 ```
+3. If you use your local as backend server, Enter your endpoint in `service.js`
+```JS
+const baseUrl = {{ Your endpoint }};
+```
+for backend, you can see https://github.com/dicky-julian/library-api
 
-yarn:
-```
-yarn install
-```
 ## Usage
 
 To use Library App, follow these steps:
