@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { CloseIcon } from '../Icons';
 import './modal.scss';
 
-export const popModalToogle = (el) => {
+const popModalToogle = el => {
     const popModal = document.querySelector('#pop_modal');
     const container = document.querySelector('#pop_modal .modal__container');
 
@@ -18,7 +18,7 @@ export const popModalToogle = (el) => {
     }
 }
 
-export const modalToogle = (id) => {
+const modalToogle = id => {
     const el = document.getElementById(id);
     const status = el.classList.contains("modal__show");
     if (el) {
@@ -36,7 +36,18 @@ export const modalToogle = (id) => {
     }
 }
 
-export const PopModal = () => {
+const hidePopModal = () => {
+    const popModal = document.querySelector('#pop_modal');
+    const container = document.querySelector('#pop_modal .modal__container');
+    popModal.classList.remove("show");
+    popModal.classList.add("hide");
+    setTimeout(() => {
+        popModal.style.display = "none";
+        ReactDOM.unmountComponentAtNode(container);
+    }, 500);
+}
+
+const PopModal = () => {
     return (
         <div id="pop_modal" className="hide" style={{ display: 'none' }}>
             <div className="bg__fade"></div>
@@ -48,7 +59,7 @@ export const PopModal = () => {
     )
 }
 
-const Modal = (props) => {
+const Modal = props => {
     const idName = props.id;
     return (
         <div className="modal modal__hide" id={idName} style={{ display: 'none' }}>
@@ -57,15 +68,11 @@ const Modal = (props) => {
     )
 }
 
-export const hidePopModal = () => {
-    const popModal = document.querySelector('#pop_modal');
-    const container = document.querySelector('#pop_modal .modal__container');
-    popModal.classList.remove("show");
-    popModal.classList.add("hide");
-    setTimeout(() => {
-        popModal.style.display = "none";
-        ReactDOM.unmountComponentAtNode(container);
-    }, 500);
-}
-
 export default Modal;
+
+export {
+    popModalToogle,
+    modalToogle,
+    PopModal,
+    hidePopModal
+}

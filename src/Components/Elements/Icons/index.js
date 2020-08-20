@@ -4,6 +4,7 @@ import BorderColorIcon from '@material-ui/icons/BorderColor';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
 
 export {
     CheckIcon,
@@ -11,5 +12,6 @@ export {
     BorderColorIcon,
     DeleteIcon,
     ExitToAppIcon,
-    MenuIcon
+    MenuIcon,
+    SearchIcon
 }

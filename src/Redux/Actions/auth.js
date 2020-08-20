@@ -12,7 +12,7 @@ export const revokeToken = (val) => {
     }
 }
 
-export const setUser = (data) => {
+export const setUser = data => {
     let role = false;
     if (data.role === 'admin') role = true
     return {
@@ -21,5 +21,12 @@ export const setUser = (data) => {
             isLogin: data,
             isAdmin: role
         }
+    }
+}
+
+export const setLoading = status => {
+    return {
+        type: 'SET_LOADING',
+        payload: status
     }
 }

@@ -1,4 +1,4 @@
-const baseUrl = 'http://app-1f820b94-8f0a-4899-9184-460036f902de.cleverapps.io';
+const baseUrl = 'https://app-1f820b94-8f0a-4899-9184-460036f902de.cleverapps.io';
 
 const services = {
     FETCH_LOGIN: `${baseUrl}/login`,

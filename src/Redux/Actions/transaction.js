@@ -14,11 +14,29 @@ export const setBookHistory = (data) => {
     }
 }
 
+export const setLoading = status => {
+    return {
+        type: 'SET_LOADING',
+        payload: status
+    }
+}
+
 export const fetchUserBook = id => dispatch => {
     return getTransaction(id, 1).then(bookBorrow => {
         getTransaction(id, 2).then(bookHistory => {
-            dispatch(setBookBorrow(bookBorrow.data));
-            dispatch(setBookHistory(bookHistory.data))
+            if (typeof (bookBorrow) === 'string') {
+                dispatch(setBookBorrow([]))
+            } else {
+                dispatch(setBookBorrow(bookBorrow.data))
+            }
+
+            if (typeof (bookHistory) === 'string') {
+                dispatch(setBookHistory([]))
+            } else {
+                dispatch(setBookHistory(bookHistory.data))
+            }
+
+            dispatch(setLoading(false));
         })
     })
 }

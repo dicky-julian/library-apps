@@ -1,6 +1,6 @@
 const initialState = {
-    bookBorrow: [],
-    bookHistory: []
+    bookBorrow: '',
+    bookHistory: ''
 }
 
 const transaction = (state = initialState, action) => {
@@ -8,7 +8,10 @@ const transaction = (state = initialState, action) => {
         case 'SET_BOOK_BORROW':
             return {
                 ...state,
-                bookBorrow: action.payload
+                bookBorrow: state.bookBorrow ?
+                    [...state.bookBorrow, action.payload]
+                    :
+                    action.payload
             }
         case 'SET_BOOK_HISTORY':
             return {

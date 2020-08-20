@@ -1,11 +1,11 @@
 import React from 'react';
-import { popModalToogle } from '../../Components/Elements/Modal';
+import { popModalToogle, hidePopModal } from '../../Components/Elements/Modal';
 import { fetchRegister } from '../../Utils/Api/index';
 
 const showModal = (msg) => {
     let el = <>
         <h4 className="txt__center">{msg}</h4>
-        <button className="bt fw__medium ft__cp" style={{margin: '0 auto', display: 'flex'}} onClick={() => window.location.reload()}>OK</button>
+        <button className="bt fw__medium ft__cp" style={{margin: '0 auto', display: 'flex'}} onClick={() => hidePopModal()}>OK</button>
     </>
     popModalToogle(el);
 }

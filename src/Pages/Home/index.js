@@ -1,85 +1,86 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Empty from '../Empty';
-import Product from '../../Components/Elements/Product';
-import Modal, { modalToogle } from '../../Components/Elements/Modal';
-import { compareValues } from '../../Utils/Api/index';
+import { Empty, Modal, Product } from '../../Components';
+import { modalToogle } from '../../Components/Elements/Modal';
+import { SearchIcon } from '../../Components/Elements/Icons';
+import { compareValues } from '../../Utils/Api';
 import { fetchBook, fetchBookFilter } from '../../Redux/Actions/book';
 import { baseUrl } from '../../Utils/service';
-
-// icons
-import SearchIcon from '@material-ui/icons/Search';
-
-// assets
+import { loading } from '../../Assets/images';
 import './home.scss';
 
-class Home extends Component {
-    constructor() {
-        super();
-        this.state = {
-            dataStatus: 'all',
-            dataBookSort: ''
-        }
-    }
+const Home = props => {
+    const [dataStatus, setDataStatus] = useState('all');
+    const [dataBookSort, setDataBookSort] = useState();
+    const [favoriteBook, setFavoriteBook] = useState();
 
-    handleSearch = (e) => {
+    const dataBook = props.book.book;
+    const dataGenre = props.book.genre;
+    const bookFilter = props.book.bookFilter;
+
+    const handleSearch = e => {
         e.preventDefault();
         const search = document.querySelector("#form__search>input").value;
-
-        if (search) this.props.history.push(`/book?search=${search}`);
+        if (search) props.history.push(`/book?search=${search}`);
     }
 
-    handleGenreBook = (e, status) => {
-        this.setState({ dataStatus: status });
+    const handleGenreBook = (e, status) => {
+        setDataStatus(status);
+        setDataBookSort();
         document.querySelector('#genre__list .active').classList.remove('active');
         e.target.classList.add('active');
     }
 
-    sortTools = (e, key) => {
-        let data = this.props.book.book[this.state.dataStatus];
+    const sortTools = (e, key, order = 'asc') => {
         let newData = '';
-        let activeEl = document.querySelector("#sort__tools>.active");
-        if (activeEl) activeEl.classList.remove("active");
-        e.target.classList.add("active");
-        if (data) {
-            newData = data.sort(compareValues(key, 'desc'));
+        let data = [...dataBook[dataStatus]];
+        let activeEl = document.querySelector('#sort__tools>.active');
+
+        e.target.classList.add('active');
+
+        if (activeEl) {
+            activeEl.classList.remove('active');
         }
-        this.setState({ dataBookSort: newData });
-        modalToogle("sort__tools");
+        if (data) {
+            newData = data.sort(compareValues(key, order));
+        }
+        setDataBookSort(newData);
+        modalToogle('sort__tools')
     }
 
-    componentDidMount() {
-        if (!this.props.book.book) this.props.fetchBook();
-        this.props.fetchBookFilter([null, 'rating', 'DESC', 3]);
-    }
+    useEffect(() => {
+        if (!dataBook) props.fetchBook();
+        if (!bookFilter) props.fetchBookFilter([null, 'rating', 'DESC', 4]);
+        if (bookFilter && !favoriteBook) {
+            const book = [...bookFilter];
+            delete book[3];
+            setFavoriteBook(book);
+        }
+    }, [dataBook, bookFilter, favoriteBook])
 
-    render() {
-        const dataBook = this.props.book.book;
-        const dataBookSort = this.state.dataBookSort;
-        const dataGenre = this.props.book.genre;
-        const favoriteBook = this.props.book.bookFilter;
-        return (
-            <>
-                {/* HEADER */}
-                <div className="home__header bg__setup">
-                    <h1 className="fw__thin">Find <b className="fw__medium">perfect</b> book for <b className="fw__medium">today</b></h1>
-                    <form id="form__search" onSubmit={this.handleSearch}>
-                        <input type="text" placeholder="What book are you looking for ?" required />
-                        <SearchIcon className="icon c__pointer" />
-                    </form>
+    return (
+        <>
+            {/* HEADER */}
+            <div className="home__header bg__setup">
+                <h1 className="fw__thin">Find <b className="fw__medium">perfect</b> book for <b className="fw__medium">today</b></h1>
+                <form id="form__search" onSubmit={handleSearch}>
+                    <input type="text" placeholder="What book are you looking for ?" required />
+                    <SearchIcon className="icon c__pointer" />
+                </form>
+            </div>
+
+            {/* LIST of TOP BOOK */}
+            <div className="product__toplist">
+                <div className="product__desc">
+                    <h4>Top of the last week</h4>
+                    <p>The most desired books of the last week</p>
                 </div>
-
-                {/* LIST of TOP BOOK */}
-                <div className="product__toplist">
-                    <div className="product__desc">
-                        <h4>Top of the last week</h4>
-                        <p>The most desired books of the last week</p>
-                    </div>
-                    {favoriteBook ?
-                        favoriteBook.map((data, index) => {
-                            return (
-                                <div className="product" key={index}>
+                {favoriteBook ?
+                    
+                    favoriteBook.map((data, key) => {
+                        return (
+                            <div className="product" key={key}>
                                     <img src={`${baseUrl}/images/${data.image}`} alt="" />
                                     <div>
                                         <h5><Link to={`/book/${data.id}`}>{data.title}</Link></h5>
@@ -87,61 +88,61 @@ class Home extends Component {
                                         <Link to={`/book/${data.id}`} className="fw__medium">Read more</Link>
                                     </div>
                                 </div>
-                            )
-                        }) : <></>
-                    }
-                </div>
+                        )
+                    }) : <></>
+                }
+            </div>
 
-                <div className="home__body">
-                    <div className="product__tools">
-                        <div className="bt bt__default c__pointer" onClick={() => modalToogle("sort__tools")}>Sorts</div>
+            <div className="home__body">
+                <div className="product__tools">
+                    <div className="bt bt__default c__pointer" onClick={() => modalToogle("sort__tools")}>Sorts</div>
 
-                        {/* GENRE LIST */}
-                        <div id="genre__list" className="genre__list">
-                            <div className="active" onClick={(e) => this.handleGenreBook(e, 'all')}>All</div>
-                            {dataGenre ?
-                                dataGenre.map((data, index) => {
-                                    return (<div key={index} onClick={(e) => this.handleGenreBook(e, data.id)}>{data.name}</div>)
-                                }) : <></>
-                            }
-                        </div>
-                        <div className="bt bt__default c__pointer" onClick={() => modalToogle("filter__tools")}>Filters</div>
-                    </div>
-
-                    {/* SORT & FILTER COLLAPSE */}
-                    <Modal id="sort__tools">
-                        <h6 onClick={(e) => this.sortTools(e, 'title')}>Title</h6>
-                        <h6 onClick={(e) => this.sortTools(e, 'rating')}>Rating</h6>
-                    </Modal>
-
-                    <Modal id="filter__tools">
-                        <h6 className="active">All</h6>
-                        <h6>New</h6>
-                        <h6>Popular</h6>
-                    </Modal>
-
-                    {/* LIST of ALL BOOK */}
-                    <div className="product__list">
-                        {
-                            dataBookSort ?
-                                dataBookSort.map((data, index) => {
-                                    return <Product data={data} key={index} />
-                                })
-                                :
-                                dataBook ?
-                                    dataBook[this.state.dataStatus].length ?
-                                        dataBook[this.state.dataStatus].map((data, index) => {
-                                            return <Product data={data} key={index} />
-                                        }) : <Empty message="Cant find data" /> : <Empty message="Cant find data" />
+                    {/* GENRE LIST */}
+                    <div id="genre__list" className="genre__list">
+                        <div className="active" onClick={(e) => handleGenreBook(e, 'all')}>All</div>
+                        {dataGenre ?
+                            dataGenre.map((data, key) => {
+                                return (<div key={key} onClick={(e) => handleGenreBook(e, data.id)}>{data.name}</div>)
+                            }) : <></>
                         }
                     </div>
                 </div>
-            </>
-        )
-    }
+
+                {/* SORT & FILTER COLLAPSE */}
+                <Modal id="sort__tools">
+                    <h6 onClick={(e) => sortTools(e, 'title', 'asc')}>Title</h6>
+                    <h6 onClick={(e) => sortTools(e, 'rating', 'desc')}>Rating</h6>
+                </Modal>
+
+                {/* LIST of ALL BOOK */}
+                <div className="product__list">
+                    {
+                        dataBookSort ?
+                            dataBookSort.map((data, key) => (
+                                <Product data={data} key={key} />
+                            ))
+                            :
+                            dataBook ?
+                                dataBook[dataStatus].length ?
+                                    dataBook[dataStatus].map((data, key) => (
+                                        <Product data={data} key={key} />
+                                    ))
+                                    :
+                                    <Empty message="Cant find data" />
+                                :
+                                <div className='loading'>
+                                    <img src={loading} alt='loading' />
+                                    <h4>Loading . . .</h4>
+                                </div>
+                    }
+                </div>
+            </div>
+        </>
+    )
 }
 
 const mapStateToProps = state => ({
+    auth: state.auth,
     book: state.book
 });
 

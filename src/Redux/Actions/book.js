@@ -45,11 +45,19 @@ export const setSingleBook = (book, author, genre) => {
     }
 }
 
+export const setLoading = status => {
+    return {
+        type: 'SET_LOADING',
+        payload: status
+    }
+}
+
 // fetch book from API
 export const fetchBook = () => dispatch => {
     return getBook().then(book => {
         getGenre().then(genre => {
-            dispatch(setBook(book.data, genre.data))
+            dispatch(setBook(book.data, genre.data));
+            dispatch(setLoading(false));
         })
     })
 }
@@ -57,14 +65,16 @@ export const fetchBook = () => dispatch => {
 // fetch book from api with filter 
 export const fetchBookFilter = (query) => dispatch => {
     return getBook(...query).then(book => {
-        dispatch(setBookFilter(book.data))
+        dispatch(setBookFilter(book.data));
+        dispatch(setLoading(false));
     })
 }
 
 // fetch author
 export const fetchAuthor = () => dispatch => {
     return getAuthor().then(author => {
-        dispatch(setAuthor(author.data))
+        dispatch(setAuthor(author.data));
+        dispatch(setLoading(false));
     }) 
 }
 
@@ -72,7 +82,8 @@ export const fetchSingleBook = (id_book) => dispatch => {
     return getBookById(id_book).then(book => {
         getAuthorById(book.data[0].id_author).then(author => {
             getGenreById(book.data[0].id_genre).then(genre => {
-                dispatch(setSingleBook(book.data[0], author.data[0], genre.data[0]))
+                dispatch(setSingleBook(book.data[0], author.data[0], genre.data[0]));
+                dispatch(setLoading(false));
             })
         })
     })

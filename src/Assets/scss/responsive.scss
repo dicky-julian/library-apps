@@ -30,8 +30,7 @@
         border-bottom: 1px solid #dbdbde;
 
         .bt {
-            margin-top: 65px;
-            position: absolute;
+            margin-top: 130px;
 
             &:nth-child(1) {
                 left: 5%
@@ -337,6 +336,12 @@
         right: 10%;
         .arrow__helper {
             right: 65px;
+        }
+    }
+    .loading {
+        min-height: 85vh;
+        img {
+            width: 50%;
         }
     }
 }

@@ -1,70 +1,70 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import Empty from '../Empty';
-import Product from '../../Components/Elements/Product';
-import { fetchUserBook } from '../../Redux/Actions/transaction';
+import { Empty, Product } from '../../Components';
+import { setLoading, fetchUserBook } from '../../Redux/Actions/transaction';
+import { loading } from '../../Assets/images';
 
 // assets
 import './mybook.scss';
 
-class MyBook extends Component {
-    constructor() {
-        super();
-        this.state = {
-            toogleStatus: 1
-        }
-    }
+const MyBook = props => {
+    const userData = props.auth.isLogin;
+    const dataBorrow = props.transaction.bookBorrow;
+    const dataHistory = props.transaction.bookHistory;
 
-    componentDidMount() {
-        const id = this.props.auth.isLogin.id;
-        this.props.fetchUserBook(id);
-    }
+    const [status, setStatus] = useState(1);
 
-    handleToogleStatus = (e, status) => {
+    const handleToogleStatus = (e, activeStatus) => {
         document.querySelector('.genre__list .active').classList.remove('active');
         e.target.classList.add('active');
-        this.setState({ toogleStatus: status });
+        setStatus(activeStatus);
     }
 
-    render() {
-        const status = this.state.toogleStatus;
-        const dataBorrow = this.props.transaction.bookBorrow;
-        const dataHistory = this.props.transaction.bookHistory;
-        return (
-            <div className="my_book">
-                <div className="product__tools">
-                    <div className="genre__list">
-                        <div className="active" onClick={(e) => this.handleToogleStatus(e, 1)}>Borrowed</div>
-                        <div onClick={(e) => this.handleToogleStatus(e, 0)}>History</div>
-                    </div>
+    useEffect(() => {
+        if (!dataBorrow && !dataHistory) {
+            props.setLoading(true);
+            props.fetchUserBook(userData.id);
+        }
+    }, [dataBorrow, dataHistory])
+
+    return (
+        <div className="my_book">
+            <div className="product__tools">
+                <div className="genre__list">
+                    <div className="active" onClick={e => handleToogleStatus(e, 1)}>Borrowed</div>
+                    <div onClick={e => handleToogleStatus(e, 0)}>History</div>
                 </div>
-                {/* LIST of ALL BOOK */}
-                <div className="product__list">
-                    {status ?
-                        dataBorrow ?
+            </div>
+            {/* LIST of ALL BOOK */}
+            <div className="product__list">
+                {status ?
+                    dataBorrow ?
                         dataBorrow.length ?
-                            dataBorrow.map((data, index) => {
-                                return <Product data={data} key={index} />
+                            dataBorrow.map((data, key) => {
+                                return <Product data={data} key={key} />
                             })
-                            :
-                            <Empty message="Cant find data" />
                             :
                             <Empty message="Cant find data" />
                         :
-                        dataHistory ?
+                        <div className='loading'>
+                            <img src={loading} alt='loading' />
+                        </div>
+                    :
+                    dataHistory ?
                         dataHistory.length ?
-                            dataHistory.map((data, index) => {
-                                return <Product data={data} key={index} />
+                            dataHistory.map((data, key) => {
+                                return <Product data={data} key={key} />
                             })
                             :
                             <Empty message="Cant find data" />
-                            :
-                            <Empty message="Cant find data" />
-                    }
-                </div>
+                        :
+                        <div className='loading'>
+                            <img src={loading} alt='loading' />
+                        </div>
+                }
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 const mapStateToProps = state => ({
@@ -72,6 +72,6 @@ const mapStateToProps = state => ({
     transaction: state.transaction
 });
 
-const mapDispathToProps = { fetchUserBook };
+const mapDispathToProps = { setLoading, fetchUserBook };
 
 export default connect(mapStateToProps, mapDispathToProps)(MyBook);

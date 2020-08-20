@@ -1,24 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { BorderColorIcon, DeleteIcon } from '../Icons';
 import { showModal } from './action';
 import { baseUrl } from '../../../Utils/service';
 
-class Table extends Component {
-    render() {
-        const datas = this.props.data;
-        const author = this.props.author;
-        const genre = this.props.genre;
-        const type = this.props.type;
-        return (
-            <div className="database__content" id="database__content">
-                <div>
-                    <h4 className="ft__cp leelawade">{type}'s Datas</h4>
-                    <button className="bt fw__medium ft__cp" onClick={() => showModal(type, { author: author, genre: genre })}>Add {type}</button>
-                </div>
-                <table>
-                    <tbody>
-                        {datas.map((data, index) => {
+const Table = props => {
+    const datas = props.data
+    const author = props.author;
+    const genre = props.genre;
+    const type = props.type;
+
+    return (
+        <div className="database__content" id="database__content">
+            <div>
+                <h4 className="ft__cp leelawade">{type}'s Datas</h4>
+                <button className="bt fw__medium ft__cp" onClick={() => showModal(type, { author: author, genre: genre })}>Add {type}</button>
+            </div>
+            <table>
+                <tbody>
+                    {datas ?
+                        datas.map((data, index) => {
                             return (
                                 <tr key={index}>
                                     {type === "book" ?
@@ -51,13 +52,15 @@ class Table extends Component {
                                         </div>
                                     </td>
                                 </tr>
-                            )}
-                        )}
-                    </tbody>
-                </table>
-            </div>
-        )
-    }
+                            )
+                        })
+                        :
+                        <></>
+                    }
+                </tbody>
+            </table>
+        </div>
+    )
 }
 
 export default Table;

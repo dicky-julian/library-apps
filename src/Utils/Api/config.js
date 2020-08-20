@@ -6,7 +6,7 @@ const decodeToken = token => {
 }
 
 // sort data
-const compareValues = (key, order = 'asc') => {
+const compareValues = (key, order) => {
   return function innerSort(a, b) {
     if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
       return 0;
