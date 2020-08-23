@@ -137,11 +137,15 @@ const handleUpdate = (e, type, id) => {
         updateBook(data, id).then(window.location.reload());
     } else if (type === 'author') {
         const name = e.target.querySelector('input').value;
-        updateAuthor(name, id).then(window.location.reload());
+        updateAuthor(name, id).then(res => {
+            if (res) window.location.reload();
+        });
     }
     else if (type === 'genre') {
         const name = e.target.querySelector('input').value;
-        updateGenre(name, id).then(window.location.reload());
+        updateGenre(name, id).then(res => {
+            if (res) window.location.reload();
+        });
     }
 }
 
